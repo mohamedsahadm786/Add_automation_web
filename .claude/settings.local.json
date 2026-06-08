@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"c:\\\\Users\\\\PC\\\\Desktop\\\\nxbprojects\\\\automationonboarding\")",
+      "Bash(del \"c:\\\\Users\\\\PC\\\\Desktop\\\\nxbprojects\\\\automationonboarding\\\\app.js\" \"c:\\\\Users\\\\PC\\\\Desktop\\\\nxbprojects\\\\automationonboarding\\\\index.html\" \"c:\\\\Users\\\\PC\\\\Desktop\\\\nxbprojects\\\\automationonboarding\\\\styles.css\")",
+      "Bash(npx vite *)"
+    ]
+  }
+}

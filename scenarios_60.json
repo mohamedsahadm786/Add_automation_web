@@ -1,0 +1,1442 @@
+[
+  {
+    "id": "gym_post_workout_mirror_01",
+    "category": "gym",
+    "archetype": "held_with_phone",
+    "difficulty": "hard",
+    "scene": "Modern commercial gym with a large floor-to-ceiling mirror wall; treadmills and cable machines softly out of focus behind the subject; large windows letting in late-afternoon golden-hour light; polished concrete floor.",
+    "outfit": {
+      "style_brief": "Matte black athletic set, minimal warm-metal jewellery, no-makeup freshness, post-workout polish.",
+      "female": "Matte black ribbed seamless sports bra with thin straps, matching high-waist seamless black leggings, low black ankle socks, no shoes. Hair styled in a slick high ponytail with a few face-framing pieces left loose. Small gold huggie hoops, a touch of lip gloss, otherwise bare glowing skin.",
+      "male": "Matte black fitted sweat-wicking training tank, matching black mid-thigh training shorts with a compression liner, low black ankle socks, no shoes. Hair styled neatly and pushed back off the face, lightly damp. A simple thin chain, clean groomed look."
+    },
+    "pose": "Standing facing the mirror at a slight three-quarter angle, weight on one hip, the opposite foot slightly forward, posture relaxed and confident, a soft smile.",
+    "hand_assignment": {
+      "phone_hand": "left",
+      "product_hand": "right",
+      "free_hand_action": "the left hand holds the phone at face level, capturing the mirror reflection"
+    },
+    "grip_or_placement": "Right hand at upper-chest level: thumb on the front face of the box near the top edge, index and middle fingers on the back of the box, ring and pinky tucked under, box angled forty-five degrees toward the mirror so the front face is clearly visible in the reflection.",
+    "lighting": "Mixed gym lighting - cool overhead fluorescents combined with warm window backlight from late-afternoon sun behind the subject. Subtle rim light on shoulders and hair, neutral light on the box with a warm window-side rim.",
+    "mood": "post-workout earned, lightly winded, composed",
+    "palette": "bone white, concrete grey, warm window glow, charcoal black",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "gym_treadmill_water_break_02",
+    "category": "gym",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "Quiet corner of a premium gym; a single treadmill stationary in the background; soft natural daylight from a side window; polished wood floor area; a folded white gym towel draped over the treadmill handlebar.",
+    "outfit": {
+      "style_brief": "Sage-green athleisure, soft and tonal, a relaxed mid-workout pause, minimal gold accent.",
+      "female": "Sage green long-sleeve cropped athletic pullover with thumbholes, matching sage green high-waist leggings, white minimalist running sneakers, a thin gold chain barely visible at the collarbone. Hair styled in a low loose ponytail.",
+      "male": "Sage green long-sleeve fitted training top with thumbholes, matching sage green training joggers with a tapered leg, white minimalist running sneakers. Hair styled neat and natural. No jewellery, clean and understated."
+    },
+    "pose": "Standing beside the treadmill, body angled three-quarters toward the camera, one hand resting on the treadmill handlebar, weight on one leg.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests lightly on the treadmill handlebar"
+    },
+    "grip_or_placement": "Right hand at hip level, palm slightly upward, the box held in a relaxed pinch grip - thumb on the top edge, four fingers underneath the bottom face, held flat horizontally with the front face angled slightly toward the camera.",
+    "lighting": "Soft natural daylight from a side window, cool with a subtle warm undertone, neutral wash on the box surface.",
+    "mood": "composed mid-workout pause",
+    "palette": "sage green, polished wood warm tone, soft daylight white",
+    "framing": "three-quarter (knee up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "gym_weights_area_cooldown_03",
+    "category": "gym",
+    "archetype": "placed_on_surface",
+    "difficulty": "medium",
+    "scene": "Weights area of a premium gym; a dumbbell rack in soft focus behind; black rubber flooring; a lifting bench in the foreground; industrial pendant lighting overhead; a dark exposed-brick wall on the right.",
+    "outfit": {
+      "style_brief": "Deep burgundy athletic set, warm industrial gym, post-set recovery.",
+      "female": "Deep burgundy cropped tank top, matching burgundy bike shorts with a double-band waistband, cropped white socks, white minimalist trainers. Hair styled in a messy bun on top of the head with a few loose pieces. Small silver studs.",
+      "male": "Deep burgundy fitted athletic tank, matching burgundy training shorts with a double-band waistband, cropped white socks, white minimalist trainers. Hair styled short and slightly damp from the workout. No jewellery."
+    },
+    "pose": "Sitting on the lifting bench, knees apart, leaning slightly forward with forearms resting on the thighs, looking off-camera to the side as if catching breath after a set.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": null,
+      "free_hand_action": "both forearms rest forward on the thighs"
+    },
+    "grip_or_placement": "The product box sits on the lifting bench beside the subject's right thigh, front face angled toward the camera, a stainless steel water bottle next to it and a small folded grey gym towel beside both. The product is the foreground hero of the surface arrangement.",
+    "lighting": "Warm overhead industrial pendant light slightly behind the subject, a soft warm rim on shoulders and hair, cooler ambient fill from the gym ceiling, a warm glow on the box's front face.",
+    "mood": "post-set quiet recovery",
+    "palette": "deep burgundy, charcoal black, warm pendant amber, polished concrete grey",
+    "framing": "three-quarter (waist up, bench surface visible to the right)",
+    "camera_height": "slightly below eye line, looking up"
+  },
+  {
+    "id": "gym_locker_room_finish_04",
+    "category": "gym",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "Premium gym locker room; light wood lockers behind; a long wooden bench in the foreground with a folded white gym towel and a small leather duffel bag on it; soft warm sconce lighting on the wall.",
+    "outfit": {
+      "style_brief": "Oversized heather-grey loungewear layered over an athletic base, end-of-workout calm.",
+      "female": "Heather grey oversized cropped sweatshirt over a black sports bra with the strap visible at the neckline, matching heather grey wide-leg sweatpants pooling at the ankles, white slip-on sneakers. Damp hair worn down with the front pieces twisted back loosely. A single thin gold chain.",
+      "male": "Heather grey oversized crewneck sweatshirt over a black athletic base layer with the crew collar visible, matching heather grey wide-leg sweatpants pooling at the ankles, white slip-on sneakers. Damp hair pushed back off the face. No jewellery."
+    },
+    "pose": "Standing beside the bench, body angled three-quarters toward the camera, one foot slightly raised on the bench, looking down at the box in hand with a soft satisfied half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand tucks damp hair behind the ear"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face, index and middle fingers wrapping the right side, ring and pinky tucked under the bottom edge, box held vertically (long side vertical) with the front face turned to the camera.",
+    "lighting": "Warm sconce lighting from behind, soft overhead locker-room light, a gentle golden cast across the wood lockers, warm tones on the box surface.",
+    "mood": "post-shower satisfied, end-of-workout calm",
+    "palette": "warm wood, heather grey, cream towel, soft amber",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "office_desk_midday_05",
+    "category": "office",
+    "archetype": "placed_on_surface",
+    "difficulty": "medium",
+    "scene": "Sleek modern home office; a light walnut desk against a soft cream wall; an open silver laptop turned slightly away from camera; a ceramic mug of black coffee on a marble coaster; a stack of two design books with a small snake plant in a terracotta pot; a tortoiseshell pen across an open leather notebook; a large window to the right with sheer linen curtains diffusing midday light.",
+    "outfit": {
+      "style_brief": "Polished smart-casual in cream and navy, premium work-from-home register, considered and quiet.",
+      "female": "Navy blue silk camisole under a soft cream cashmere V-neck cardigan buttoned only at the top button, matching cream wide-leg tailored trousers with a slight crop hem, woven flat leather slides. Hair styled in a low half-up twist with a small tortoiseshell claw clip, the rest in soft waves. Small gold studs, a thin gold pendant, subtle polished daytime makeup.",
+      "male": "A navy fine-knit short-sleeve polo under a soft cream lightweight cashmere cardigan worn open, matching cream tailored trousers with a slight crop hem, woven leather loafers. Hair styled neatly. A simple watch with a tan leather strap, clean groomed look."
+    },
+    "pose": "Seated at the desk in three-quarter angle to the camera, body turned slightly toward the laptop, one hand resting on the open notebook, the other pulled back from the keyboard mid-thought, looking softly at the product on the desk with a small contemplative smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": null,
+      "free_hand_action": "one hand rests on the open notebook, the other is pulled back from the keyboard mid-thought"
+    },
+    "grip_or_placement": "The product box sits on the desk between the coffee mug and the open notebook, front face directly toward the camera, long side horizontal, positioned slightly forward of the laptop at the visual centre of the desk so it reads as the hero of the workspace.",
+    "lighting": "Bright but soft midday daylight filtered through sheer linen curtains on the right, a neutral diffuse wash across the face and the walnut desk, a very gentle warm undertone on the box's front face, no harsh shadows.",
+    "mood": "mid-workday wellness moment, polished focus",
+    "palette": "cream cashmere, navy, warm walnut, ivory ceramic, soft sage green",
+    "framing": "medium close-up (chest up, desk surface visible at lower frame)",
+    "camera_height": "slightly above eye line, looking gently down at the desk"
+  },
+  {
+    "id": "pilates_reformer_mirror_06",
+    "category": "pilates",
+    "archetype": "held_with_phone",
+    "difficulty": "hard",
+    "scene": "Premium pilates studio; a sage-green reformer machine behind the subject; a tall floor-to-ceiling mirror the subject faces; warm marble floor; an exposed brick side wall; a tall window on the left letting in late-afternoon sun.",
+    "outfit": {
+      "style_brief": "Tonal cream activewear, soft and minimal, post-class polish, barefoot studio convention.",
+      "female": "Cream ribbed seamless cropped tank with a built-in shelf bra, matching cream high-waist seamless leggings, bare feet. Small gold huggie earrings, a thin gold pendant. Hair styled down in soft natural waves with a centre part, clean neutral nails.",
+      "male": "A cream fitted seamless training tee, matching cream tapered training tights, bare feet. Hair styled neat with a natural part. No jewellery, clean and minimal."
+    },
+    "pose": "Standing facing the mirror, weight on one leg, the opposite knee slightly bent, posture upright with a soft confident smile.",
+    "hand_assignment": {
+      "phone_hand": "right",
+      "product_hand": "left",
+      "free_hand_action": "the right hand holds the phone at face level, capturing the mirror reflection"
+    },
+    "grip_or_placement": "Left hand at chest level: thumb pressed flat on the front face, four fingers wrapping the back edge, box held perpendicular to the body so the front face points directly at the mirror.",
+    "lighting": "Soft warm natural daylight through a tall window on the left, late afternoon, warm bone tones across the marble floor, a gentle warm rim on the left side and a warm glow on the box's front face.",
+    "mood": "post-class composed, polished",
+    "palette": "cream, beige, sage green, warm marble bone",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "yoga_home_practice_07",
+    "category": "yoga",
+    "archetype": "held_product_high",
+    "difficulty": "hard",
+    "scene": "Sunlit corner of a minimalist home; warm wood floor; a cork-textured yoga mat unrolled diagonally across the frame; a terracotta zafu meditation cushion at the upper end; a small Tibetan singing bowl with a wooden mallet beside it; a sprig of dried lavender on the floor; a large pothos plant in a woven basket against the wall.",
+    "outfit": {
+      "style_brief": "Dusty mauve seamless training set, meditative warmth, glowy fresh-practice skin.",
+      "female": "Dusty mauve seamless ribbed cropped long-sleeve top with thumbholes, matching dusty mauve high-waist seamless leggings with a wide waistband, bare feet. Hair styled in a high half-up topknot with the lower half in soft waves. Small gold huggie hoops, a thin gold ring. Glowy skin with a touch of bronze on the eyelids.",
+      "male": "A dusty mauve seamless ribbed long-sleeve training top with thumbholes, matching dusty mauve relaxed-fit training shorts, bare feet. Hair styled neatly back off the face. No jewellery, fresh natural skin."
+    },
+    "pose": "Kneeling on the yoga mat in a seiza-style sitting position (legs folded under, sitting back on the heels), posture upright and aligned, shoulders relaxed, looking softly down at the product held in front at chest level with a serene calm half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "both",
+      "free_hand_action": "both hands cradle the box together at chest level"
+    },
+    "grip_or_placement": "Both hands cradle the box together at chest level, palms facing up and meeting at the centreline of the body, the box resting flat horizontally on the fingertips with thumbs gently pressing the front face on either side, four fingers of each hand cradling the back edge. Front face angled gently up toward the camera at a soft fifteen-degree tilt.",
+    "lighting": "Soft warm early-evening golden-hour daylight from a tall window just out of frame on the left, a gentle directional warm wash across the left side of the body and the front face of the box, a deeper warm shadow on the right side, warm honeyed tones across the wood floor and cork mat.",
+    "mood": "meditative intentional, end-of-practice reflection",
+    "palette": "dusty mauve, warm wood, terracotta, soft sage green, warm golden light",
+    "framing": "medium close-up (waist up, hands and product centred)",
+    "camera_height": "chest level (matching the kneeling height), straight-on"
+  },
+  {
+    "id": "pilates_studio_entrance_08",
+    "category": "pilates",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "Entrance hallway of a premium pilates studio; warm wood floor; a sage-green wall on the right; a tall mirror on the left wall reflecting the studio interior; a small wooden bench against the right wall with a rolled cream towel and a straw tote bag; soft morning light through the front door at the far end.",
+    "outfit": {
+      "style_brief": "Pale buttery-yellow activewear, fresh arriving energy, light and clean.",
+      "female": "Pale buttery yellow ribbed seamless tank top, matching pale yellow high-waist bike shorts, white slip-on canvas sneakers, a small gold cuff bracelet. Hair styled in a low loose bun at the nape. Subtle gold huggie earrings.",
+      "male": "A pale buttery yellow ribbed seamless training tee, matching pale yellow mid-thigh training shorts, white slip-on canvas sneakers. Hair styled short and neat. No jewellery."
+    },
+    "pose": "Walking toward the camera at a slight three-quarter angle, mid-stride, one foot just leaving the floor, looking slightly off-camera with a soft natural smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand holds the strap of a small straw tote bag at the side"
+    },
+    "grip_or_placement": "Right hand at chest level held slightly forward of the body: thumb on the front face, four fingers wrapping the back edge, box held at a relaxed angle three-quarters toward the camera.",
+    "lighting": "Soft warm morning daylight from the open front door at the end of the hallway, a golden cast on the wood floor, warm rim light on the right side.",
+    "mood": "arriving fresh, calm energy",
+    "palette": "pale buttery yellow, warm wood, sage green, cream",
+    "framing": "full body (head to mid-shin)",
+    "camera_height": "slightly below eye line, looking up gently"
+  },
+  {
+    "id": "pilates_mat_morning_handheld_09",
+    "category": "pilates",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "Sunlit pilates studio; a cream-colored mat on the warm wood floor; a sage-green reformer in the background out of focus; a tall window on the right flooding morning light into the room.",
+    "outfit": {
+      "style_brief": "Dusty pink seamless set, soft morning calm, barefoot, glowy fresh skin.",
+      "female": "Soft dusty pink seamless sports bra with crossback straps, matching dusty pink high-waist leggings, a thin gold anklet, bare feet. Hair styled down in soft beach waves with a centre part, glowy skin, no makeup.",
+      "male": "A soft dusty pink seamless fitted training tee, matching dusty pink relaxed training shorts, bare feet. Hair styled neat with a natural part. No jewellery, fresh natural skin."
+    },
+    "pose": "Sitting cross-legged on the mat, posture upright, hands resting in the lap, looking down at the box with a soft contemplative smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "both",
+      "free_hand_action": "both hands hold the box together in the lap"
+    },
+    "grip_or_placement": "Both hands cradle the box in the lap, palms facing up and slightly together, the box resting on the fingertips with the front face angled toward the camera at a slight upward tilt, thumbs resting on either side of the front face.",
+    "lighting": "Bright soft morning daylight from a tall window on the right, warm bone tones across the wood floor and mat, a gentle warm wash on the right side and on the box surface.",
+    "mood": "morning intention setting, peaceful",
+    "palette": "dusty pink, warm wood, cream mat, sage green",
+    "framing": "three-quarter (head to crossed knees)",
+    "camera_height": "slightly below eye line, looking up"
+  },
+  {
+    "id": "pilates_studio_post_class_mirror_10",
+    "category": "pilates",
+    "archetype": "held_product_high",
+    "difficulty": "hard",
+    "scene": "Premium pilates studio viewed from a fresh angle; warm marble floor; a sage-green reformer behind; an exposed brick wall on the right; the subject standing in front of a floor-to-ceiling mirror with the reformer reflected behind.",
+    "outfit": {
+      "style_brief": "Slate-grey seamless long-sleeve set, cool-toned and poised, silver accents.",
+      "female": "Slate grey seamless ribbed cropped long-sleeve top with thumbholes, matching slate grey high-waist seamless leggings, a thin silver chain necklace, small silver hoops, bare feet. Hair styled in a low slick ponytail with a small clip. Subtle natural makeup.",
+      "male": "A slate grey seamless ribbed long-sleeve training top with thumbholes, matching slate grey tapered training tights, bare feet. Hair styled neatly slicked back. A simple thin silver chain."
+    },
+    "pose": "Standing in three-quarter angle to the mirror, weight on one leg, the free hand on the hip, posture confident and relaxed.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests lightly on the hip"
+    },
+    "grip_or_placement": "Right hand at upper-chest level, box held in a clear pinch grip - thumb on the front face near the bottom edge, index and middle fingers on the back, ring and pinky tucked under, box angled slightly toward the camera for direct camera engagement (not toward the mirror).",
+    "lighting": "Soft warm late-afternoon daylight through a tall window on the left, warm bone tones across the marble floor, a gentle warm glow on the box surface, subtle rim light on the left shoulder.",
+    "mood": "post-class polished, poised",
+    "palette": "slate grey, warm marble bone, sage green, soft amber",
+    "framing": "medium close-up (chest up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "bedroom_bed_handheld_close_11",
+    "category": "bedroom",
+    "archetype": "held_product_high",
+    "difficulty": "hard",
+    "scene": "Bedroom morning; soft white bedding with a leopard-print pillowcase visible behind the head; a light wood headboard partially visible; a sheer white curtain on a window to the right letting in soft golden morning light.",
+    "outfit": {
+      "style_brief": "Relaxed morning sleepwear in soft ivory, just-woke warmth, bare glowy skin.",
+      "female": "A pale ivory satin slip nightgown with thin spaghetti straps, slightly crumpled from sleep, the top of the slip visible at the neckline. Hair styled tousled from sleep in soft waves spread on the pillow. Bare face, glowy skin, no earrings.",
+      "male": "A soft ivory cotton short-sleeve sleep tee, slightly crumpled from sleep, the crew neckline visible. Hair styled tousled from sleep. Bare face, fresh skin, no accessories."
+    },
+    "pose": "Lying on the back on the pillow, photographed from above-front so the face and upper chest are visible, a soft sleepy half-smile at the camera.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests near the chin, fingers lightly curled"
+    },
+    "grip_or_placement": "Right hand raised in front of the face holding the box vertically, thumb on one side and four fingers wrapped around the opposite side, box positioned about twenty centimetres from the face with the front face angled directly at the camera.",
+    "lighting": "Soft warm morning daylight from the window on the right, a diffuse golden wash across the face and pillow, no harsh shadows, a gentle warm glow on the box surface.",
+    "mood": "playful first-thing-morning, sleepy soft smile",
+    "palette": "ivory satin, leopard tan, warm white, skin warmth",
+    "framing": "close-up (head and upper chest, box dominant in frame)",
+    "camera_height": "directly above the face, slight tilt"
+  },
+  {
+    "id": "bedroom_vanity_getting_ready_12",
+    "category": "bedroom",
+    "archetype": "placed_on_surface",
+    "difficulty": "medium",
+    "scene": "Bedroom vanity area; a round arched mirror on a warm walnut vanity; arranged skincare bottles and a small ceramic dish on a gold tray; a linen-shaded lamp glowing warmly in the corner; soft early-morning light from a window out of frame.",
+    "outfit": {
+      "style_brief": "Soft blush morning robe over a light base layer, gentle skincare-moment calm.",
+      "female": "A pale blush pink linen robe loosely tied at the waist with a slim ribbon sash, the V-neckline open showing a thin white camisole strap underneath. Hair clipped half-up in a claw clip, the lower half in soft waves. Bare face mid-skincare application.",
+      "male": "A pale blush-grey waffle short robe loosely tied at the waist over a plain white crew tee, the neckline open. Hair styled lightly tousled, freshly woken. Bare face mid-skincare application."
+    },
+    "pose": "Sitting on a small upholstered vanity stool, three-quarter angle to the camera, one hand at the cheek mid-skincare gesture, looking toward the reflection in the mirror.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": null,
+      "free_hand_action": "one hand is lifted to the cheek mid-skincare application"
+    },
+    "grip_or_placement": "The product box sits on the vanity surface to the subject's right, positioned between a ceramic skincare bottle and an open glass jar of cotton pads, front face angled three-quarters toward the camera as the visual anchor of the vanity arrangement.",
+    "lighting": "Warm bedside lamp from the corner combined with soft morning daylight from a window out of frame on the left, warm honeyed tones across the walnut vanity, a gentle warm glow on the box surface.",
+    "mood": "slow morning skincare moment, soft and unhurried",
+    "palette": "warm walnut, blush pink, soft amber lamp glow, ivory ceramics",
+    "framing": "three-quarter (head to waist, vanity surface visible)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "bedroom_robe_with_product_13",
+    "category": "bedroom",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "Bedroom doorway leading to a softly-lit bathroom in the background; hardwood floor; a low cream bench in front of the doorway with a folded white towel and a ceramic mug; soft morning light from windows throughout.",
+    "outfit": {
+      "style_brief": "Long cream waffle-knit robe, soft morning-routine ease.",
+      "female": "A long cream waffle-knit robe tied loosely at the waist, falling to mid-shin, the V-neckline open with a thin white camisole strap underneath. Hair styled down in loose tousled morning waves. Small gold studs, bare face, glowy skin.",
+      "male": "A long cream waffle-knit robe tied loosely at the waist over a plain white crew tee and soft grey lounge shorts. Hair styled lightly tousled. No accessories, fresh skin."
+    },
+    "pose": "Standing in the doorway angled slightly to one side, weight on one leg, looking down at the box in hand with a soft contemplative smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "left",
+      "free_hand_action": "the right hand gently holds the edge of the doorframe"
+    },
+    "grip_or_placement": "Left hand at hip level, palm facing up, the box resting flat on the open palm with the thumb gently on top to steady it, front face toward the camera - a relaxed casual hold, not a presentation grip.",
+    "lighting": "Soft warm morning daylight from windows on either side, a balanced diffuse wash, a gentle warm glow on the cream robe and the box.",
+    "mood": "morning routine pause, considering the start of the day",
+    "palette": "cream waffle, warm wood, soft white, blush undertones",
+    "framing": "full body (head to mid-shin)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "bedroom_journaling_evening_14",
+    "category": "bedroom",
+    "archetype": "placed_on_surface",
+    "difficulty": "medium",
+    "scene": "Bedroom corner writing nook at twilight; a vintage caramel-leather armchair angled slightly toward the camera; a small warm-wood side table with a brass desk lamp glowing softly; an open leather-bound journal on the side table; a ceramic mug of chamomile tea with a tea-bag string over the rim; a tall window behind showing deep blue twilight with the last warm orange band on the horizon.",
+    "outfit": {
+      "style_brief": "Soft sage-green linen pajama set, evening wind-down warmth.",
+      "female": "A soft sage green linen long-sleeve button-up pajama top tucked loosely into matching sage green linen wide-leg pajama pants, two top buttons open, sleeves rolled to mid-forearm, bare feet. Hair styled in a low loose braid over one shoulder. No earrings, a single thin gold ring, bare face, glowy nighttime skin.",
+      "male": "A soft sage green linen long-sleeve button-up pajama shirt worn loose over matching sage green linen pajama pants, two top buttons open, sleeves rolled to mid-forearm, bare feet. Hair styled lightly relaxed. No accessories, fresh nighttime skin."
+    },
+    "pose": "Sitting in the armchair with one leg tucked under, the other foot lightly on the floor, body angled three-quarters toward the side table, the writing hand mid-write in the open journal with a tortoiseshell pen, looking down at the page with a small thoughtful smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": null,
+      "free_hand_action": "the writing hand holds a tortoiseshell pen mid-write in the open journal"
+    },
+    "grip_or_placement": "The product box sits on the side table directly beside the brass desk lamp, front face angled three-quarters toward the camera, positioned between the lamp and the chamomile tea mug as the central element of the nightstand arrangement. The lamp glow falls warm across the box's front face.",
+    "lighting": "A warm brass desk lamp on the right creates a strong directional warm pool across the side table and the right side of the face, combined with cool deep-blue twilight from the window behind giving a cool rim on the shoulders and hair - strong warm/cool dual-source mood lighting.",
+    "mood": "evening wind-down, reflective, end-of-day intention",
+    "palette": "sage green linen, caramel leather, warm brass amber, twilight blue",
+    "framing": "three-quarter (head to mid-thigh, side table visible at right edge)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "kitchen_breakfast_prep_15",
+    "category": "kitchen",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "Bright modern kitchen; a white marble countertop with a wooden cutting board holding fresh strawberries, a half-sliced banana and a ceramic bowl of granola; a high-end blender containing a green smoothie mid-blend; a small herb plant in a terracotta pot on the windowsill; bright morning light pouring through a tall window behind the island.",
+    "outfit": {
+      "style_brief": "Relaxed mint-and-cream linen, unhurried morning-prep warmth.",
+      "female": "A soft mint green oversized linen button-down shirt with sleeves rolled to the elbows, two top buttons open showing a thin white cropped tank underneath, paired with cream linen drawstring shorts, bare feet. Hair styled in a high messy bun with face-framing pieces escaping. Small gold huggie hoops, layered thin gold necklaces, glowy skin, subtle natural makeup.",
+      "male": "A soft mint green oversized linen button-down shirt with sleeves rolled to the elbows, worn open over a plain white crew tee, paired with cream linen drawstring shorts, bare feet. Hair styled lightly tousled. No accessories, fresh morning skin."
+    },
+    "pose": "Standing at the kitchen island in three-quarter angle to the camera, hip leaning lightly against the counter edge, one hand resting on the cutting board near the strawberries, looking softly down at the box in the other hand with a small content smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests on the cutting board beside the strawberries"
+    },
+    "grip_or_placement": "Right hand at hip level, box held flat horizontally with the thumb on the top edge near the back, index and middle fingers along the bottom face, ring and pinky tucked under, front face angled three-quarters toward the camera at a relaxed casual angle.",
+    "lighting": "Bright soft morning daylight from a tall window behind the island, a backlit window with diffuse front-fill from one side, warm bone tones across the marble countertop, a gentle warm glow on the box's front face.",
+    "mood": "unhurried morning ritual, fresh prep, intentional",
+    "palette": "mint green linen, cream linen, white marble, strawberry red, fresh green",
+    "framing": "three-quarter (waist up, counter and cutting board visible)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "kitchen_matcha_morning_handheld_16",
+    "category": "kitchen",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "Modern minimalist kitchen island with a white marble countertop; light wood stools tucked under; a soft cream wall behind; a small green plant in a ceramic pot; a bamboo whisk in a ceramic matcha bowl with fresh matcha powder dusted on the rim.",
+    "outfit": {
+      "style_brief": "Oversized butter-yellow waffle knit, slow-Saturday softness.",
+      "female": "An oversized soft butter-yellow long-sleeve waffle-knit pullover, sleeves pushed up, the pullover loose and falling slightly off one shoulder, a thin white camisole strap visible underneath. Cream linen drawstring shorts, bare feet. Hair styled in a messy low bun with face-framing pieces.",
+      "male": "An oversized soft butter-yellow long-sleeve waffle-knit pullover, sleeves pushed up, worn relaxed with a plain white crew tee visible at the neckline. Cream linen drawstring shorts, bare feet. Hair styled lightly tousled. No accessories."
+    },
+    "pose": "Standing at the kitchen island three-quarter angle to the camera, one hip leaning against the counter edge, looking softly down at the matcha bowl with a relaxed half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "left",
+      "free_hand_action": "the right hand holds the bamboo whisk poised over the matcha bowl"
+    },
+    "grip_or_placement": "Left hand at hip level resting against the counter edge, holding the box in a relaxed casual grip - thumb on the top edge, four fingers along the bottom edge, held flat horizontally with the front face angled three-quarters toward the camera.",
+    "lighting": "Soft morning daylight from a window out of frame on the left, warm bone tones across the marble countertop, a gentle warm side-light on the arm and the box's front face.",
+    "mood": "slow Saturday morning, unhurried",
+    "palette": "butter yellow, white marble, light wood, matcha green, cream",
+    "framing": "three-quarter (waist up, counter surface visible)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "kitchen_breakfast_nook_17",
+    "category": "kitchen",
+    "archetype": "placed_on_surface",
+    "difficulty": "medium",
+    "scene": "Cozy breakfast nook in a corner of the kitchen; a small round walnut-wood table against a tall window with sheer curtains; a cream linen upholstered chair; a ceramic vase of dried wildflowers in muted ochre and sage tones; an open hardcover book face-down; an empty ceramic coffee cup on a wooden saucer with cinnamon dust on the rim; bright golden morning sunlight streaming onto the table.",
+    "outfit": {
+      "style_brief": "Luxurious emerald silk loungewear, lingering slow-morning richness.",
+      "female": "A deep emerald-green silk kimono robe with wide elbow-length sleeves and a self-fabric tie at the waist, loosely tied open showing a thin white camisole underneath, matching deep emerald silk relaxed-fit pajama pants, bare feet. Hair styled down in soft natural waves with a side part, a single thin gold pendant. Subtle natural makeup with a touch of bronze.",
+      "male": "A deep emerald-green silk short robe with wide sleeves and a self-fabric tie, worn open over a plain white crew tee, matching deep emerald silk relaxed pajama pants, bare feet. Hair styled lightly relaxed. No accessories, fresh skin."
+    },
+    "pose": "Sitting at the breakfast nook in the cream linen chair, body angled three-quarters toward the camera, one leg crossed over the other, one elbow resting on the table with the hand cupping the chin thoughtfully, looking softly toward the camera with a relaxed half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": null,
+      "free_hand_action": "one hand cups the chin thoughtfully, the elbow resting on the table"
+    },
+    "grip_or_placement": "The product box sits on the walnut-wood table directly in front of the subject, front face angled three-quarters toward the camera, positioned between the ceramic coffee cup and the open book as the central element of the breakfast-nook arrangement. Morning sunlight from the window falls warm across the box's front face.",
+    "lighting": "Bright warm golden morning sunlight from the tall window behind the nook, a strong directional warm wash across the table surface and the front face of the box, a gentle warm side-light on the face, deeper warm shadows on the side away from the window.",
+    "mood": "slow Saturday morning, lingering breakfast, contemplative",
+    "palette": "deep emerald silk, walnut wood, cream linen, warm golden morning, dried ochre",
+    "framing": "three-quarter (chest up, breakfast table surface visible at lower frame)",
+    "camera_height": "chest level, across-table angle"
+  },
+  {
+    "id": "kitchen_coffee_bar_moment_18",
+    "category": "kitchen",
+    "archetype": "held_product_high",
+    "difficulty": "hard",
+    "scene": "A sleek built-in coffee bar in a modern kitchen; an espresso machine on the counter; a small open shelf above with arranged ceramic mugs; a white marble counter; a ceramic tray with a folded linen napkin and a small wood spoon.",
+    "outfit": {
+      "style_brief": "Charcoal knit with dark denim, polished casual morning energy.",
+      "female": "A charcoal grey ribbed long-sleeve cropped pullover with sleeves long enough to partly cover the hands, high-waisted dark-wash relaxed jeans with a slight crop hem, white minimalist sneakers. Hair styled down in soft waves. Layered thin gold necklaces, small gold huggie hoops.",
+      "male": "A charcoal grey ribbed long-sleeve fitted pullover, dark-wash relaxed straight-leg jeans, white minimalist sneakers. Hair styled neatly. A simple watch, no other accessories."
+    },
+    "pose": "Standing facing the coffee bar three-quarter angle to the camera, looking down at the box held at chest level with a soft confident smile, weight on one leg.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests lightly on the marble counter edge"
+    },
+    "grip_or_placement": "Right hand at upper-chest level: thumb on the front face near the top edge, index and middle fingers on the back, ring and pinky tucked under, box angled forty-five degrees toward the camera.",
+    "lighting": "Cool overhead pendant lighting on the coffee bar combined with warm morning daylight from a window on the right, a mixed cool/warm wash on the face and a warm rim on the right side of the box.",
+    "mood": "morning ritual, polished casual energy",
+    "palette": "charcoal grey, dark denim, warm marble, espresso brown, brass accents",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "bathroom_warm_oak_shelf_19",
+    "category": "bathroom",
+    "archetype": "placed_on_surface",
+    "difficulty": "medium",
+    "scene": "Three-quarter angle on a warm-oak floating shelf against a soft cream tile bathroom wall. The shelf holds a styled lineup of beige skincare bottles, a ceramic dish with a gua sha tool, an unlit candle, the product box, and a dried flower stem. The subject's partial reflection is visible in the bathroom mirror at the left edge of the frame.",
+    "outfit": {
+      "style_brief": "White waffle bathrobe, wet hair, mid-skincare freshness - persona only partially in frame.",
+      "female": "A white waffle-knit short bathrobe loosely tied, the neckline open showing the collarbones. Hair styled wet and slicked back. Bare face mid-skincare application.",
+      "male": "A white waffle-knit short bathrobe loosely tied, the neckline open. Hair styled wet and slicked back. Bare face mid-skincare application."
+    },
+    "pose": "The persona is partial - only one shoulder, the neck, ear and a sliver of cheek are visible at the left edge of the frame; the rest of the composition belongs to the shelf and its arrangement. The subject is mid-skincare-application, fingers visible at the cheek.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": null,
+      "free_hand_action": "one hand is visible at the cheek mid-skincare application (partial in frame)"
+    },
+    "grip_or_placement": "The product box sits at the right end of the shelf with its front face angled toward the camera, between the unlit candle and the small ceramic dish - the visual hero of the shelf arrangement.",
+    "lighting": "Warm overhead bathroom lighting, a diffuse golden cast across the oak shelf and cream tile, a gentle warm glow on the box's front face, soft indirect light on the partial reflection.",
+    "mood": "calm evening reset, end-of-day skincare moment",
+    "palette": "warm cream, oat, oak, soft amber",
+    "framing": "three-quarter angle on the shelf, persona partial at left edge",
+    "camera_height": "shelf level (slightly above the shelf surface)"
+  },
+  {
+    "id": "bathroom_morning_skincare_20",
+    "category": "bathroom",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "Bright modern bathroom with a soft pink penny-tile back wall; brass fixtures; a white marble counter with arranged skincare products - a ceramic dish of cotton pads, an amber-glass dropper bottle, a clear glass tumbler of water with a slice of lemon, a folded white washcloth; a round arched mirror on the wall with the subject's reflection clearly visible behind the shoulder.",
+    "outfit": {
+      "style_brief": "Soft peach robe, dewy mid-routine glow.",
+      "female": "A soft peach silk wrap robe loosely tied at the waist, the wrap closure crossing the chest, the V-neckline open showing the collarbones and a thin white camisole strap underneath, sleeves pushed slightly past the elbows. Hair pulled back in a low loose claw-clip hold with a few face-framing pieces. Bare face mid-routine, dewy skin, no earrings, a thin gold pendant.",
+      "male": "A soft peach waffle short robe loosely tied at the waist, the V-neckline open over a plain white crew tee, sleeves pushed slightly past the elbows. Hair styled lightly damp and pushed back. Bare face mid-routine, fresh dewy skin, no accessories."
+    },
+    "pose": "Standing at the marble counter facing the mirror at a three-quarter angle to the camera, the body slightly toward the counter and the face turned to the reflection, examining the box held up toward the mirror with a small curious smile. The camera captures from the side so both the profile and the reflection are visible.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests lightly on the marble counter edge"
+    },
+    "grip_or_placement": "Right hand at chest level held so the box is between the face and the mirror: thumb pressed flat on the front face, index and middle fingers on the back edge, ring and pinky tucked under, front face angled toward the mirror.",
+    "lighting": "Bright soft morning daylight, a neutral diffuse wash across the face and the marble counter, a gentle warm glow on the box, soft pink ambient bounce from the tile wall.",
+    "mood": "fresh morning skincare moment, curious and calm",
+    "palette": "soft pink tile, white marble, peach, brass, fresh lemon yellow",
+    "framing": "medium close-up (chest up, mirror reflection visible)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "bathroom_evening_mirror_21",
+    "category": "bathroom",
+    "archetype": "held_product_high",
+    "difficulty": "hard",
+    "scene": "A calm modern bathroom in the evening; a large frameless mirror above a floating stone vanity; warm sconce lights on either side of the mirror casting a soft glow; a neatly folded towel and a small tray of skincare on the vanity; muted matte-clay tile on the walls. The composition captures both the subject and a clear reflection in the mirror.",
+    "outfit": {
+      "style_brief": "Soft charcoal waffle robe, freshly showered, damp slicked hair, end-of-day reset.",
+      "female": "A soft charcoal-grey waffle-knit robe loosely tied at the waist, the V-neckline open showing the collarbones and a thin white camisole strap underneath. Hair styled wet and slicked straight back off the face. Bare face, dewy fresh-shower skin, no earrings.",
+      "male": "A soft charcoal-grey waffle-knit robe loosely tied at the waist, the V-neckline open over a plain white crew tee. Hair styled wet and slicked straight back off the face. Bare face, dewy fresh-shower skin, no accessories."
+    },
+    "pose": "Standing at the vanity at a three-quarter angle to the camera, the face turned toward the mirror, examining the box at chest height so it appears both in the hand and in the reflection, a calm content half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests lightly on the edge of the stone vanity"
+    },
+    "grip_or_placement": "Right hand at chest level held just forward of the body: thumb pressed flat on the front face near the top, index and middle fingers on the back edge, ring and pinky tucked under, box held vertically with the front face turned toward the camera so it reads clearly in both the direct view and the mirror reflection.",
+    "lighting": "Warm symmetrical sconce lighting on either side of the mirror, a soft even golden wash across the face and the damp hair, a gentle warm tone on the box's front face, soft shadowless fill from the mirror bounce.",
+    "mood": "end-of-day reset, calm and restored",
+    "palette": "charcoal waffle, matte clay tile, warm sconce amber, soft stone grey",
+    "framing": "medium close-up (chest up, mirror reflection visible alongside)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "recovery_couch_evening_22",
+    "category": "recovery",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A cream-upholstered modern sofa in a warmly-lit living room; a large soft throw blanket draped behind; a small wooden side table with an unlit candle and a stainless steel water bottle; a floor lamp glowing softly in the upper-left corner; a window in the background with twilight-blue dusk light filtering in.",
+    "outfit": {
+      "style_brief": "Oatmeal cashmere loungewear, end-of-day exhale.",
+      "female": "A heavyweight oatmeal-colored cashmere cropped lounge sweater, matching oatmeal cashmere wide-leg lounge pants, white slouchy crew socks. Hair styled in a low loose bun. Layered thin gold necklaces, no earrings, bare face, glowy skin.",
+      "male": "A heavyweight oatmeal-colored cashmere crewneck lounge sweater, matching oatmeal cashmere relaxed lounge pants, white slouchy crew socks. Hair styled relaxed and natural. No accessories, fresh skin."
+    },
+    "pose": "Sitting on the sofa with one leg tucked under, the other foot on the floor, body angled three-quarters toward the camera, looking softly down at the box in the lap with a content smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "both",
+      "free_hand_action": "both hands hold the box together in the lap"
+    },
+    "grip_or_placement": "Both hands rest in the lap holding the box gently, palms partially facing up, thumbs on the front face on either side, fingers cradling the back, box held flat horizontally with the front face up toward the camera at a soft tilt.",
+    "lighting": "Warm floor-lamp light from the upper-left combined with deep cool-blue twilight from the background window - mixed warm/cool mood lighting, a warm wash on the face and box surface, cool ambient blue behind.",
+    "mood": "end-of-day exhale, recovery evening",
+    "palette": "oatmeal cashmere, cream sofa, warm amber lamp, twilight blue",
+    "framing": "three-quarter (head to lap)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "recovery_armchair_reading_23",
+    "category": "recovery",
+    "archetype": "placed_on_surface",
+    "difficulty": "medium",
+    "scene": "A deep sand-beige linen-upholstered armchair tucked into a reading corner of a softly-lit living room; a tall slim floor lamp with a linen shade glowing warmly behind the chair; a small round walnut side table holding a ceramic mug of herbal tea, an open hardcover book face-down, a tortoiseshell reading-glass case and the product box; a small green plant in a terracotta pot beside the chair.",
+    "outfit": {
+      "style_brief": "Chocolate-brown ribbed knit with cream linen, late-afternoon restorative calm.",
+      "female": "A chocolate brown ribbed cropped long-sleeve top with a relaxed boat neckline showing the collarbones, cream linen wide-leg pants with a slight crop hem, slouchy cream cable-knit crew socks. Hair styled in a low loose bun with a few face-framing pieces. No earrings, a thin gold ring, bare face, glowy skin.",
+      "male": "A chocolate brown ribbed long-sleeve fitted top with a relaxed crew neckline, cream linen relaxed-fit trousers with a slight crop hem, slouchy cream cable-knit crew socks. Hair styled relaxed and natural. No accessories, fresh skin."
+    },
+    "pose": "Sitting in the armchair with one leg tucked under, the other foot on the floor, body angled three-quarters toward the camera and slightly toward the side table, one hand resting in the lap, the other raised lightly to brush hair from the temple, looking softly toward the side table with a content half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": null,
+      "free_hand_action": "one hand rests in the lap, the other is raised lightly to the face brushing hair from the temple"
+    },
+    "grip_or_placement": "The product box sits on the walnut side table directly to the subject's right, front face angled three-quarters toward the camera, positioned between the ceramic mug and the open hardcover book as the central element of the side-table arrangement. The warm lamp glow falls softly across the box's front face.",
+    "lighting": "A warm floor lamp from the upper-left behind the armchair throws a strong directional warm pool across the chair, side table and the right side of the face and body; cool blue late-afternoon ambient light fills the rest of the room from a window out of frame on the right, giving a cool counter-fill across the left side.",
+    "mood": "late-afternoon quiet reading moment, restorative pause",
+    "palette": "chocolate brown, cream linen, sand-beige armchair, warm lamp amber, cool afternoon blue",
+    "framing": "three-quarter (head to mid-thigh, side table visible at right edge)",
+    "camera_height": "chest level, slight angle toward the side table"
+  },
+  {
+    "id": "recovery_post_shower_robe_24",
+    "category": "recovery",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A bedroom or living room corner; soft natural daylight from a large window on the left; a wooden chair with a folded cashmere throw draped over it; a small green plant in a ceramic pot beside the chair; a warm wood floor.",
+    "outfit": {
+      "style_brief": "Long ivory waffle robe, damp hair, fresh post-shower calm.",
+      "female": "A long ivory waffle-knit robe tied loosely at the waist, sleeves pushed to the elbows, the robe falling to mid-shin, a white spaghetti-strap camisole visible at the V-neckline. Hair styled damp and slicked back into a low loose bun. Small gold studs, bare face, dewy fresh-shower skin.",
+      "male": "A long ivory waffle-knit robe tied loosely at the waist, sleeves pushed to the elbows, worn over soft grey lounge shorts and a plain white crew tee. Hair styled damp and pushed back. No accessories, dewy fresh-shower skin."
+    },
+    "pose": "Standing in three-quarter angle to the camera, weight on one leg, one foot slightly forward, looking softly down at the box with a calm content smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests at the hip, gently touching the robe sash"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face, four fingers wrapping the back edge, box held vertically (long side vertical) with the front face directly toward the camera.",
+    "lighting": "Soft cool morning daylight from a large window on the left, a balanced diffuse wash across the face and robe, a gentle cool-neutral tone on the box surface.",
+    "mood": "post-shower fresh, calm beginning",
+    "palette": "ivory waffle, warm wood, sage green plant, soft daylight white",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "outdoor_post_walk_park_25",
+    "category": "outdoor",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A gravel walking path in a leafy urban park during golden hour; soft green trees in the background slightly out of focus; a wooden park bench to one side with a leather tote bag resting on it; late-afternoon golden sunlight filtering through the tree canopy.",
+    "outfit": {
+      "style_brief": "Olive-and-black athletic layers with a crossbody bag, golden-hour walk energy.",
+      "female": "A cropped olive-green long-sleeve athletic pullover with a small neck zip pulled down halfway, high-waist black athletic leggings, white minimalist sneakers, a small black crossbody bag with a thin strap. Hair styled in a high sleek ponytail. Small gold huggie hoops, subtle natural makeup with a touch of gloss.",
+      "male": "An olive-green long-sleeve athletic half-zip pullover with the zip pulled down partway, black athletic joggers with a tapered leg, white minimalist sneakers, a small black crossbody sling bag with a thin strap. Hair styled short and neat. No jewellery."
+    },
+    "pose": "Standing on the path facing the camera at a slight three-quarter angle, one foot slightly forward as if mid-walk pause, looking off-camera with a soft natural smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand holds the strap of the small black crossbody bag"
+    },
+    "grip_or_placement": "Right hand at hip level, box held in a relaxed pinch grip, thumb on the top edge, four fingers along the bottom edge, held flat horizontally with the front face angled three-quarters toward the camera.",
+    "lighting": "Warm late-afternoon golden-hour sunlight filtered through the tree canopy on one side, dappled warm light across the face and outfit, a gentle warm glow on the box's front face, deep green shadows in the background.",
+    "mood": "golden-hour walk, fresh outdoor energy",
+    "palette": "olive green, black athletic, golden warm, deep tree green",
+    "framing": "full body (head to mid-calf)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "outdoor_smoothie_bar_26",
+    "category": "outdoor",
+    "archetype": "placed_on_surface",
+    "difficulty": "medium",
+    "scene": "An outdoor counter at a sunny smoothie and juice bar; a polished wood counter; an open bookcase of plant-based cookbooks behind; lush green ferns hanging above; a tall glass of green smoothie on the counter; a small ceramic ramekin of granola; the product box; bright natural daylight all around.",
+    "outfit": {
+      "style_brief": "White cotton with sand linen trousers, bright morning smoothie energy.",
+      "female": "A white cotton wrap top with a tie at the waist (tied loosely on the side), high-waist tailored sand-colored linen wide-leg trousers, woven flat sandals just visible. Hair styled down in soft natural waves. Small gold studs, a layered thin gold necklace, subtle bronzy makeup.",
+      "male": "A white cotton short-sleeve linen-blend shirt worn relaxed and untucked, sand-colored tailored linen trousers, woven leather sandals just visible. Hair styled short and neat. No jewellery, fresh natural skin."
+    },
+    "pose": "Standing at the smoothie-bar counter, body angled three-quarters toward the camera, both hands resting lightly on the counter, looking softly down at the green smoothie with a small smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": null,
+      "free_hand_action": "both hands rest lightly on the counter edge"
+    },
+    "grip_or_placement": "The product box sits on the wood counter directly in front of the subject, between the green smoothie glass and the granola ramekin, front face angled three-quarters toward the camera, part of the morning smoothie-bar arrangement.",
+    "lighting": "Bright natural daylight from above and the sides, slightly diffused by the canopy of ferns, a warm wash across the face and the wood counter, a gentle warm glow on the box.",
+    "mood": "morning smoothie ritual, bright and energetic",
+    "palette": "warm wood, sand linen, white cotton, deep green ferns, vibrant green smoothie",
+    "framing": "three-quarter (waist up, counter surface visible)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "outdoor_golden_hour_patio_27",
+    "category": "outdoor",
+    "archetype": "held_product_high",
+    "difficulty": "easy",
+    "scene": "A modern minimalist patio at golden hour; a low concrete planter with small ornamental grasses behind; a folded teak deck chair to one side with a cream linen throw draped over it; a distant city skyline softly out of focus in the background; warm low-angle sunlight.",
+    "outfit": {
+      "style_brief": "Sleek black tailored separates, confident golden-hour glow.",
+      "female": "A black square-neck cropped tank top, matching black mid-thigh tailored shorts, low-heeled brown leather sandals, a thin gold tennis bracelet, small gold huggie hoops. Hair styled down in soft beach waves, subtle bronzy makeup with a soft glow.",
+      "male": "A black fitted short-sleeve crew tee, matching black mid-thigh tailored shorts, low brown leather sandals. Hair styled neatly. A simple watch with a tan strap, no other accessories."
+    },
+    "pose": "Standing on the patio facing the camera at a slight three-quarter angle, weight on one leg, looking directly at the camera with a relaxed confident smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests at the side"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face, index and middle fingers on the back, ring and pinky tucked under, box angled slightly toward the camera so the front face catches the warm golden-hour light directly.",
+    "lighting": "Strong warm golden-hour sunlight from a low angle on one side, a golden rim light across the shoulder and the side of the box, deep amber tones across the patio, a soft cool sky in the background.",
+    "mood": "golden-hour glow, confident and calm",
+    "palette": "black tailored, warm gold, teak wood, deep amber, soft sky cool",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "cafe_morning_table_28",
+    "category": "cafe",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A cozy minimalist neighbourhood cafe; a small round white-marble bistro table next to a large arched window; a wicker chair pulled up to the table; on the table a wide ceramic latte cup with milky foam art, a small wooden plate with a flaky golden croissant, an open hardcover book face-down; behind, a soft-focus cafe interior with brass pendant lights and exposed brick; soft morning city light through the arched window.",
+    "outfit": {
+      "style_brief": "Rust-orange knit with dark denim, slow weekday cafe pause.",
+      "female": "A rust-orange ribbed knit short-sleeve sweater with a relaxed crew neckline showing the collarbones, tucked loosely into high-waist dark-wash straight-leg jeans with a slight crop hem, low-heeled brown leather slingback sandals. Small gold huggie hoops, layered thin gold necklaces, a thin gold cuff bracelet. Hair styled down in soft natural waves with a side part, subtle bronzy daytime makeup.",
+      "male": "A rust-orange ribbed knit short-sleeve sweater with a relaxed crew neckline, paired with high-waist dark-wash straight-leg jeans with a slight crop hem, brown leather loafers. Hair styled neatly. A simple watch, no other accessories."
+    },
+    "pose": "Seated in the wicker chair at the bistro table, body angled three-quarters toward the camera, one leg crossed over the other, one hand wrapped around the warm ceramic latte cup, the other resting in the lap holding the box, looking softly out the window with a content half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand wraps lightly around the warm ceramic latte cup"
+    },
+    "grip_or_placement": "Right hand rests in the lap at thigh level, the box held flat horizontally on top of the thigh with the thumb on the top edge near the back, index and middle fingers along the bottom face, ring and pinky tucked under, front face angled three-quarters up toward the camera - a relaxed casual hold, not a presentation grip.",
+    "lighting": "Soft warm morning daylight through the large arched window on one side, a gentle directional wash across the face and the bistro-table surface, warm honey tones across the white marble and the front face of the box, deeper warm shadows on the cafe interior behind.",
+    "mood": "slow weekday cafe pause, intentional pre-work moment",
+    "palette": "rust orange, dark wash denim, warm white marble, golden latte foam, exposed brick",
+    "framing": "three-quarter (chest up, bistro table surface visible at lower frame)",
+    "camera_height": "across-table angle, chest level"
+  },
+  {
+    "id": "travel_hotel_morning_29",
+    "category": "travel",
+    "archetype": "placed_on_surface",
+    "difficulty": "medium",
+    "scene": "A premium boutique hotel room in the morning; a soft white linen-upholstered bed with rumpled cream sheets and a folded throw at the foot; a small warm-wood nightstand with a brass reading lamp, a ceramic dish for jewellery, a hardcover travel guidebook face-down, and the product box; an open cabin-sized leather travel bag on a luggage rack in the lower-left foreground with neatly folded clothes visible; tall floor-to-ceiling windows behind the bed opening to a blurred soft-focus sunlit balcony with potted greenery.",
+    "outfit": {
+      "style_brief": "Camel cashmere over light sleepwear, unhurried away-from-home morning.",
+      "female": "A soft camel-colored cashmere oversized cardigan worn open over a thin white spaghetti-strap silk camisole and matching ivory satin pajama shorts with cream piping. Slouchy cream cashmere crew socks pushed down at the ankles. Hair styled down in soft natural morning waves with a slight side part, a small tortoiseshell claw clip holding the upper half in a half-up twist. A thin gold pendant, a thin gold cuff bracelet. Glowy fresh-morning skin, a touch of tinted lip balm.",
+      "male": "A soft camel-colored cashmere oversized cardigan worn open over a plain white crew tee and matching soft grey cotton sleep shorts. Slouchy cream cashmere crew socks pushed down at the ankles. Hair styled lightly tousled, freshly woken. No accessories, glowy fresh-morning skin."
+    },
+    "pose": "Sitting on the edge of the hotel bed with the body angled three-quarters toward the camera and slightly toward the nightstand, one leg crossed casually over the other, one hand resting flat on the bedsheets beside the hip, the other brought up to lightly tuck a piece of hair back, looking softly toward the nightstand with a relaxed content half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": null,
+      "free_hand_action": "one hand rests on the bedsheets, the other lightly tucks hair behind the ear"
+    },
+    "grip_or_placement": "The product box sits on the warm-wood nightstand directly to the subject's right, front face angled three-quarters toward the camera, positioned between the brass reading lamp and the hardcover travel guidebook as the central element of the morning travel arrangement. Morning window light falls softly across the box's front face.",
+    "lighting": "Bright soft morning daylight pours through the tall floor-to-ceiling windows behind the bed, a backlit window with diffuse front-fill across the face and the front of the bed, warm honey tones across the cream sheets and the wood nightstand, a gentle warm wash on the box's front face, soft cool ambient shadows on the opposite side.",
+    "mood": "travel morning, unhurried hotel ritual, away-from-home routine",
+    "palette": "camel cashmere, ivory satin, cream linen, warm wood, soft morning gold",
+    "framing": "three-quarter (head to mid-thigh, nightstand visible at right edge, travel bag at lower-left)",
+    "camera_height": "chest level, slight angle toward the nightstand"
+  },
+  {
+    "id": "garden_terrace_morning_30",
+    "category": "outdoor",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A private home terrace at morning golden hour; terracotta tile flooring with a subtle natural patina; low square planters along the edge holding small ornamental olive trees and trailing rosemary; a small round mosaic-topped table with a ceramic mug of coffee with visible steam and a small saucer with a single fresh fig; beyond the terrace railing a softly blurred warm Mediterranean cityscape with terracotta rooftops and soft hills.",
+    "outfit": {
+      "style_brief": "Cream linen warm-weather outfit, serene Mediterranean morning.",
+      "female": "A cream linen sleeveless midi sundress with a deep V-neckline, a thin self-fabric belt cinched at the natural waist, a relaxed A-line skirt to mid-calf. Woven natural-fiber flat espadrille sandals just visible. Layered thin gold necklaces of varying lengths, a thin gold cuff bracelet, small gold huggie hoops. Hair styled down in soft natural beach waves with a slight side part, a touch of bronzer and tinted lip balm for a glowy bronzed look.",
+      "male": "A cream linen short-sleeve camp-collar shirt worn relaxed with two top buttons open, paired with cream linen drawstring trousers, woven natural-fiber flat sandals just visible. Hair styled short and neat. A thin gold chain, otherwise minimal, glowy bronzed skin."
+    },
+    "pose": "Standing on the terrace at a slight three-quarter angle to the camera, weight on one leg with the opposite foot slightly forward, one hand resting lightly on the low planter wall, body angled toward the soft view beyond, looking softly toward the box held at chest level with a serene content smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests lightly on the low planter wall"
+    },
+    "grip_or_placement": "Right hand at upper-chest level held slightly forward of the body: thumb pressed flat on the front face near the top edge, index and middle fingers on the back edge, ring and pinky tucked under the bottom edge, box held vertically (long side vertical) with the front face angled gently toward the camera, catching the warm morning sun directly.",
+    "lighting": "Strong warm morning golden-hour sunlight from a low angle on one side, a directional warm wash across that side of the body and across the front face of the box creating a warm golden rim, deep amber tones across the terracotta tiles, a soft cool sky-blue ambient fill from above.",
+    "mood": "morning golden-hour terrace ritual, serene Mediterranean energy",
+    "palette": "cream linen, terracotta tile, olive green, warm golden morning, soft sky",
+    "framing": "medium full (mid-thigh up, terrace surface and planters visible)",
+    "camera_height": "chest level, slight three-quarter angle"
+  },
+  {
+    "id": "beach_sunrise_hold_31",
+    "category": "beach",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A wide sandy beach at sunrise; a calm pastel sky over still water; wet sand reflecting soft pink light; a weathered wooden lifeguard tower far in the soft-focus background.",
+    "outfit": {
+      "style_brief": "Relaxed beach linen over swimwear, sun-warmed sunrise glow.",
+      "female": "A terracotta ribbed one-piece swimsuit under an open ivory gauze linen beach shirt knotted at the waist, bare feet on the sand, hair in loose natural waves slightly windswept, a thin gold anklet and small gold studs, dewy sun-kissed skin.",
+      "male": "Olive swim shorts with an open unbuttoned cream linen short-sleeve shirt, bare feet on the sand, hair tousled by the breeze, a thin cord bracelet, lightly tanned fresh skin."
+    },
+    "pose": "Standing near the waterline at a three-quarter angle, weight on the back foot, looking down at the box held at chest level with a calm sunrise smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests lightly at the side, fingertips brushing the linen hem"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face near the top edge, index and middle fingers along the back, ring and pinky tucked under the bottom edge, the box held vertically with the front face angled to catch the low sunrise light.",
+    "lighting": "Soft warm sunrise from a low angle on the right, a gentle golden rim along the shoulder and the right edge of the box, cool pastel sky fill, long soft shadows on the sand.",
+    "mood": "serene sunrise calm, fresh start",
+    "palette": "terracotta, ivory linen, pastel sky pink, warm sand",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level, slight three-quarter"
+  },
+  {
+    "id": "rooftop_city_goldenhour_hold_32",
+    "category": "rooftop",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "An open city rooftop at golden hour; a low glass railing; a blurred skyline of warm-lit buildings behind; a pair of potted olive trees and a low concrete ledge.",
+    "outfit": {
+      "style_brief": "Elevated smart-casual with evening-out polish in warm light.",
+      "female": "A camel sleeveless wide-leg jumpsuit cinched with a thin tonal belt, strappy low-heeled sandals, gold hoop earrings and a stack of thin bangles, hair in a sleek low bun, soft bronzed makeup.",
+      "male": "A fitted stone-grey short-sleeve knit polo tucked into tailored charcoal trousers, brown leather loafers, a slim steel watch, hair neatly styled, clean groomed look."
+    },
+    "pose": "Standing by the railing at a three-quarter angle to the camera, weight on one hip, looking toward the camera with a relaxed confident half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "left",
+      "free_hand_action": "the right hand rests on the glass railing"
+    },
+    "grip_or_placement": "Left hand at hip level, palm turned slightly inward, the box held in a relaxed pinch - thumb along the top edge, four fingers under the bottom face, held horizontally with the front face angled three-quarters to the camera.",
+    "lighting": "Strong warm golden-hour sun from a low angle on the left, a golden rim on the arm and the box, deep amber tones on the rooftop, soft cool sky behind.",
+    "mood": "golden-hour city confidence",
+    "palette": "camel, charcoal, warm gold, hazy skyline blue",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "forest_trail_hike_hold_33",
+    "category": "nature",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A dappled forest hiking trail; tall green trees with sunbeams filtering through the canopy; mossy rocks and ferns along the path; soft bokeh of green depth behind.",
+    "outfit": {
+      "style_brief": "Technical-meets-cozy outdoor layering, trail-fresh.",
+      "female": "A forest-green half-zip fleece pullover over a fitted black base layer, slim olive hiking leggings, low hiking boots, a small crossbody pouch, hair in a practical low braid, bare fresh outdoorsy skin.",
+      "male": "A slate technical zip jacket over a charcoal tee, olive hiking trousers, trail shoes, a cord-strap cap, hair pushed back, light stubble, fresh skin."
+    },
+    "pose": "Pausing mid-trail at a three-quarter angle, one foot up on a low rock, looking down at the box raised to chest with an energized half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests on the raised knee"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb flat on the front face, four fingers wrapping the back edge, the box held vertically and tilted slightly up toward the dappled light.",
+    "lighting": "Dappled warm sunlight through the canopy from the upper left, scattered highlights across the face and the box, cool green shadow fill, deep green background bokeh.",
+    "mood": "energized trail pause, fresh air",
+    "palette": "forest green, slate, olive, warm sun-dapple",
+    "framing": "three-quarter (knee up)",
+    "camera_height": "chest level, slightly low looking up"
+  },
+  {
+    "id": "poolside_lounger_midday_hold_34",
+    "category": "poolside",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A sleek resort pool deck at bright midday; turquoise water with gentle ripples behind; a cream sun-lounger with a rolled towel; a striped umbrella casting soft shade; tropical leaves in the background.",
+    "outfit": {
+      "style_brief": "Bright resort swimwear with a relaxed coverup, sunny ease.",
+      "female": "A sleek white one-piece with a deep neckline under a sheer sky-blue kaftan, oversized tortoiseshell sunglasses pushed up into the hair, gold layered necklaces, hair in soft beachy waves, glowy bronzed skin.",
+      "male": "Navy swim trunks with a light unbuttoned palm-print short-sleeve camp shirt, sunglasses, a woven bracelet, hair pushed back damp, tanned relaxed look."
+    },
+    "pose": "Seated on the edge of the lounger at a three-quarter angle, leaning back on one hand, looking toward the camera with a sunny relaxed smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand is planted on the lounger behind for support"
+    },
+    "grip_or_placement": "Right hand resting on the thigh, the box held flat horizontally - thumb on the top edge, fingers along the bottom face, the front face tilted up three-quarters to the camera.",
+    "lighting": "Bright high midday sun softened by the umbrella, clean even light on the face, sparkling highlights off the pool water, a light warm bounce from the deck.",
+    "mood": "bright poolside leisure",
+    "palette": "white, sky blue, turquoise water, warm deck stone",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "home_greenhouse_plantroom_hold_35",
+    "category": "greenhouse",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A light-filled home greenhouse and plant room; rows of leafy potted plants and hanging trailing vines; a weathered potting bench; terracotta pots; soft diffused daylight through fogged glass panes.",
+    "outfit": {
+      "style_brief": "Earthy natural-fibre layering, calm and grounded.",
+      "female": "A sage linen sleeveless wrap top with wide-leg oatmeal linen trousers, woven slides, hair in a loose low bun with soft pieces framing the face, a thin gold pendant, fresh dewy skin.",
+      "male": "An oatmeal waffle henley with sleeves pushed up, olive relaxed chinos, canvas slip-ons, hair loosely pushed back, a leather cord necklace, calm grounded look."
+    },
+    "pose": "Standing among the plants at a three-quarter angle, looking down at the box held at chest level with a soft contemplative smile, surrounded by greenery.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "left",
+      "free_hand_action": "the right hand gently touches a nearby leaf"
+    },
+    "grip_or_placement": "Left hand at chest level: thumb on the front face, index and middle fingers along the right side, ring and pinky tucked under, the box held vertically with the front face to the camera.",
+    "lighting": "Soft diffused daylight through the greenhouse glass, a gentle even wrap on the face and box, cool green ambient bounce from the foliage, no harsh shadows.",
+    "mood": "grounded, green, restorative",
+    "palette": "sage, oatmeal linen, terracotta, leafy green",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "boxing_gym_handwrap_hold_36",
+    "category": "boxing",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A moody industrial boxing gym; a heavy bag hanging in soft focus behind; exposed brick and dark beams; a single warm overhead light pooling on the worn wood floor; a chalky atmosphere.",
+    "outfit": {
+      "style_brief": "Gritty athletic with hand wraps, intense but composed.",
+      "female": "A charcoal racerback crop top with high-waist black training shorts, white hand wraps half-on at the wrists, low socks and training shoes, hair in a slick high ponytail, focused skin with a light sheen.",
+      "male": "A sleeveless heather-grey training top with black training shorts, hand wraps at the wrists, training shoes, hair short and damp, a sheen of effort, intense calm look."
+    },
+    "pose": "Standing beside the heavy bag at a three-quarter angle, one wrapped hand resting on the bag, looking toward the camera with a composed post-round expression.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the wrapped left hand rests against the heavy bag"
+    },
+    "grip_or_placement": "Right hand at hip level, the box held in a firm pinch - thumb on the top edge, four fingers under the bottom face, held horizontally with the front face angled up to the camera.",
+    "lighting": "A single warm overhead light pooling from above, dramatic soft falloff into shadow, warm highlight on the shoulders and the top of the box, deep moody background.",
+    "mood": "gritty composed intensity",
+    "palette": "charcoal, heather grey, warm bulb amber, dark brick",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level, slightly low"
+  },
+  {
+    "id": "dance_studio_barre_hold_37",
+    "category": "dance",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A bright dance studio with a sprung pale-wood floor; a long ballet barre along a mirrored wall; tall windows with sheer curtains diffusing soft daylight; a faint chalk haze in the air.",
+    "outfit": {
+      "style_brief": "Clean dancewear, poised and elegant.",
+      "female": "A soft blush wrap-front leotard with sheer ballet-pink tights and a gauzy tied wrap skirt, soft ballet slippers, hair in a sleek classical bun, delicate studs, luminous bare skin.",
+      "male": "A fitted white dance tee tucked into charcoal dance tights, soft ballet slippers, hair neatly pushed back, clean poised look."
+    },
+    "pose": "Standing at the barre at a three-quarter angle, one hand resting lightly on the barre, an elegant lifted posture, looking down at the box held at chest with a serene smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests on the ballet barre"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb flat on the front face, four fingers wrapping the back edge, the box held vertically with the front face turned to the camera.",
+    "lighting": "Soft diffused daylight through sheer-curtained windows, a gentle even glow on the face and box, faint reflected fill from the mirrored wall, airy bright tone.",
+    "mood": "poised, elegant, light",
+    "palette": "blush, ballet pink, pale wood, soft white",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "art_studio_painting_hold_38",
+    "category": "art",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A creative art studio; a large canvas on an easel with abstract strokes; jars of brushes and palettes on a paint-splattered table; big north-facing windows with cool soft daylight; canvases leaning against the wall.",
+    "outfit": {
+      "style_brief": "Relaxed creative wear with a touch of paint, expressive.",
+      "female": "An oversized white button-down shirt with a faint smudge of colour over a fitted black tank and slim jeans, sleeves pushed up, canvas sneakers, hair clipped up loosely with strands falling, a few thin rings, fresh skin.",
+      "male": "A paint-flecked grey crewneck with rolled sleeves over a tee, relaxed denim, canvas shoes, hair a little tousled, an expressive easy look."
+    },
+    "pose": "Standing beside the easel at a three-quarter angle, one hand resting near the canvas, looking toward the camera with a relaxed creative half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "left",
+      "free_hand_action": "the right hand holds a paintbrush loosely near the easel"
+    },
+    "grip_or_placement": "Left hand at waist level, palm up, the box resting across the open palm steadied by the thumb, the front face angled up three-quarters to the camera, a casual unposed hold.",
+    "lighting": "Cool soft north-window daylight from the left, clean flat studio light on the face and box, neutral tone, a gentle shadow on the right.",
+    "mood": "expressive, relaxed, creative",
+    "palette": "white, denim blue, paint-splatter brights, cool grey",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "library_bookstore_hold_39",
+    "category": "library",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A warm wood-panelled library and bookstore; tall shelves packed with books receding in soft focus; a rolling ladder; brass picture lights glowing warmly along the shelves; a cozy reading nook.",
+    "outfit": {
+      "style_brief": "Refined academic preppy, warm and intelligent.",
+      "female": "A camel cable-knit sweater over a white collared shirt with the collar out, a pleated neutral skirt with opaque tights and loafers, hair in soft waves with a thin headband, small pearl studs, polished natural makeup.",
+      "male": "A forest-green lambswool sweater over a collared oxford shirt, tailored chinos, brown leather loafers, a slim watch, hair neatly styled, refined look."
+    },
+    "pose": "Standing in an aisle at a three-quarter angle, one hand resting on a shelf, looking down at the box held at chest level with a thoughtful soft smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests on a bookshelf edge"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face near the top, index and middle fingers on the back, ring and pinky tucked under, the box held vertically toward the camera.",
+    "lighting": "Warm brass shelf-lights casting a cozy golden glow, a soft warm key on the face and the box, deep warm shadow between the shelves, intimate tone.",
+    "mood": "warm, intelligent, cozy",
+    "palette": "camel, forest green, warm wood, brass amber",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "mountain_cabin_window_hold_40",
+    "category": "cabin",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A cozy mountain cabin interior by a large window; snow-dusted pines and a misty valley visible outside; a wood-burning stove glowing softly; a chunky knit throw over a leather armchair; warm timber walls.",
+    "outfit": {
+      "style_brief": "Chunky cozy knitwear, alpine warmth.",
+      "female": "A cream chunky cable-knit oversized sweater over thermal leggings, thick folded wool socks, hair down in soft waves slightly tousled, a delicate gold necklace, rosy fresh skin.",
+      "male": "An oatmeal chunky shawl-collar cardigan over a henley, relaxed joggers, thick wool socks, hair softly tousled, light stubble, cozy relaxed look."
+    },
+    "pose": "Standing by the window at a three-quarter angle, one shoulder leaning lightly on the frame, looking down at the box held at waist with a content cozy smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "left",
+      "free_hand_action": "the right hand is wrapped loosely around a warm mug held low"
+    },
+    "grip_or_placement": "Left hand at waist level: the box held horizontally in a relaxed grip - thumb on the top edge, fingers under the bottom face, the front face angled three-quarters to the camera.",
+    "lighting": "Soft cool daylight from the snowy window mixed with a warm glow from the wood stove, a gentle warm-cool blend on the face, a warm rim on the stove side of the box.",
+    "mood": "cozy alpine calm",
+    "palette": "cream, oatmeal, warm timber, cool snow blue",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "lakeside_dock_hold_41",
+    "category": "lakeside",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A wooden dock over a calm glassy lake at late afternoon; a distant tree-lined shore in soft focus; a small rowboat tied at the end; warm low light skimming the water.",
+    "outfit": {
+      "style_brief": "Easy summer-lake casual, breezy.",
+      "female": "A white broderie sundress with thin straps and a denim shirt tied loosely at the waist, bare feet on the dock, hair in loose air-dried waves, small gold hoops, sun-warmed skin.",
+      "male": "A faded sky-blue linen short-sleeve shirt half-buttoned over a white tee with rolled khaki shorts, bare feet, hair tousled by the lake breeze, a cord bracelet, relaxed tan."
+    },
+    "pose": "Standing near the dock's edge at a three-quarter angle, looking down at the box held up at chest with a breezy contented smile, the lake stretching behind.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand is relaxed at the side"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face, four fingers wrapping the back edge, the box held vertically and tilted to catch the warm low afternoon light.",
+    "lighting": "Warm low late-afternoon sun skimming across the lake from the right, a soft golden glow and gentle highlights on the water, a warm rim on the shoulder and box.",
+    "mood": "breezy lakeside ease",
+    "palette": "white, denim blue, warm gold, lake silver",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "desert_dusk_selfie_hold_42",
+    "category": "desert",
+    "archetype": "held_with_phone",
+    "difficulty": "hard",
+    "scene": "An open desert at dusk; rolling sand dunes glowing in fading warm light; a deep gradient sky from amber to violet; sparse dry grasses; a vast soft-focus horizon.",
+    "outfit": {
+      "style_brief": "Flowing boho desert layers, warm and free.",
+      "female": "A rust-orange flowing maxi slip dress with a cream crochet open cardigan, layered beaded necklaces, ankle boots half-buried in sand, hair in loose tousled waves, warm bronzed makeup.",
+      "male": "A sand-coloured loose linen shirt open over a tee with relaxed taupe trousers, suede desert boots, a leather cuff, hair tousled by wind, a warm sun-weathered look."
+    },
+    "pose": "Standing on a dune at a three-quarter angle holding the phone up for a selfie, looking toward the phone with a free easy smile.",
+    "hand_assignment": {
+      "phone_hand": "left",
+      "product_hand": "right",
+      "free_hand_action": "the left hand holds the phone raised, capturing the selfie"
+    },
+    "grip_or_placement": "Right hand at chest level holding the box toward the phone camera: thumb on the front face, four fingers behind, the box vertical with the front face angled to the lens.",
+    "lighting": "Warm low dusk sun behind creating a glowing rim around the hair and shoulders, an amber-to-violet sky gradient, a soft warm fill on the face bounced from the glowing dune.",
+    "mood": "free, warm, golden dusk",
+    "palette": "rust, cream crochet, amber dusk, violet sky",
+    "framing": "medium close-up (chest up, phone-selfie framing)",
+    "camera_height": "phone-selfie height, slightly above eye line"
+  },
+  {
+    "id": "city_street_walk_hold_43",
+    "category": "street",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A stylish city street in soft overcast daylight; blurred storefronts and a crosswalk behind; parked bikes and a row of trees along the curb; clean urban energy.",
+    "outfit": {
+      "style_brief": "Chic street style, effortless and current.",
+      "female": "A tailored beige trench coat open over a white tee and straight-leg blue jeans, white leather sneakers, a structured small shoulder bag, gold hoops, hair in a low sleek pony, fresh minimal makeup.",
+      "male": "A charcoal bomber jacket over a white crew tee, slim dark jeans, clean white sneakers, a slim crossbody bag, hair neatly styled, confident urban look."
+    },
+    "pose": "Walking toward the camera mid-stride at a slight three-quarter angle, one foot lifting, looking just off-camera with an effortless smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand holds the strap of the shoulder bag"
+    },
+    "grip_or_placement": "Right hand at hip level, the box held horizontally in a relaxed pinch - thumb on the top edge, fingers under, the front face angled three-quarters toward the camera as if mid-walk.",
+    "lighting": "Soft even overcast daylight, flat clean light on the face and box, a gentle neutral tone, subtle ambient shadow.",
+    "mood": "effortless street confidence",
+    "palette": "beige trench, denim blue, white, soft grey city",
+    "framing": "full body (head to mid-shin)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "rooftop_bar_neon_selfie_hold_44",
+    "category": "nightlife",
+    "archetype": "held_with_phone",
+    "difficulty": "hard",
+    "scene": "A chic rooftop bar at night; warm string lights overhead; a blurred bokeh of city lights and neon signage behind; a marble bar edge with soft reflections; a moody evening glow.",
+    "outfit": {
+      "style_brief": "Going-out evening glam, warm and luminous.",
+      "female": "A deep-emerald satin slip midi dress with delicate straps, dainty gold jewellery, hair in soft glossy waves, soft glam with a touch of shimmer.",
+      "male": "A black fitted short-sleeve knit shirt with tailored trousers, a slim silver chain, a steel watch, hair styled with a slight sheen, sharp evening look."
+    },
+    "pose": "Leaning lightly against the bar at a three-quarter angle, holding the phone up for a selfie, looking toward the lens with a warm playful smile.",
+    "hand_assignment": {
+      "phone_hand": "right",
+      "product_hand": "left",
+      "free_hand_action": "the right hand holds the phone raised for the selfie"
+    },
+    "grip_or_placement": "Left hand at chest level presenting the box toward the phone: thumb on the front face, four fingers behind, the box vertical with the front face to the lens, catching the warm string-light glow.",
+    "lighting": "A warm string-light glow from above with colourful neon bokeh behind, a soft warm key on the face, a gentle highlight on the satin and the box, a moody dark surround.",
+    "mood": "warm glamorous night-out",
+    "palette": "emerald satin, warm string-light gold, neon bokeh, deep night",
+    "framing": "medium close-up (chest up, selfie framing)",
+    "camera_height": "selfie height, slightly above eye line"
+  },
+  {
+    "id": "autumn_park_bench_hold_45",
+    "category": "autumn",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A park path in autumn; golden and amber leaves on the trees and scattered on the ground; a wooden bench; warm low sun filtering through thinning foliage; a cozy seasonal glow.",
+    "outfit": {
+      "style_brief": "Cozy autumn layers with a scarf, warm and seasonal.",
+      "female": "A rust knit turtleneck under a camel wool coat with a soft oatmeal scarf, dark slim trousers and ankle boots, leather gloves in the free hand, hair in soft waves, warm-toned makeup.",
+      "male": "A mustard lambswool sweater under a charcoal wool overcoat with a grey scarf, dark trousers and boots, hair neatly tousled, light stubble, warm cozy look."
+    },
+    "pose": "Standing near the bench among falling leaves at a three-quarter angle, looking down at the box held at chest with a warm seasonal smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand holds soft leather gloves"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face, index and middle fingers on the back, ring and pinky tucked under, the box held vertically toward the camera.",
+    "lighting": "Warm low autumn sun filtering through golden leaves from the left, dappled warm highlights, a soft golden rim on the coat and box, a cozy amber tone.",
+    "mood": "warm cozy autumn",
+    "palette": "rust, camel, mustard, golden autumn leaf",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "snowy_street_winter_hold_46",
+    "category": "winter",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A snowy city street with gently falling snow; soft white-blanketed pavement and parked cars; warm shopfront lights glowing through the flurries; bare trees with snow on the branches.",
+    "outfit": {
+      "style_brief": "Bundled winter outerwear, crisp and bright.",
+      "female": "A cream oversized puffer jacket over a chunky knit, dark leggings tucked into shearling boots, a soft ribbed beanie and a chunky scarf, hair flowing from under the beanie, rosy cold-flushed cheeks.",
+      "male": "A navy technical puffer over a grey hoodie, dark joggers tucked into winter boots, a knit beanie, hair peeking out, light stubble, fresh cold-air look."
+    },
+    "pose": "Standing on the snowy sidewalk at a three-quarter angle, slightly leaning into the warmth, looking down at the box held at waist with a bright cheerful smile, snow falling around.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand is tucked into a coat pocket"
+    },
+    "grip_or_placement": "Right hand at waist level, the box held horizontally - thumb on the top edge, fingers under, the front face angled three-quarters to the camera.",
+    "lighting": "Bright cool snow-bounced daylight with a warm shopfront glow from the side, crisp clean light, soft warm window accents, gentle blue snow shadows.",
+    "mood": "crisp cheerful winter",
+    "palette": "cream, navy, snow white, warm shop-window gold",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "vineyard_afternoon_hold_47",
+    "category": "vineyard",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "Rolling vineyard rows in warm afternoon light; green vines on trellises stretching to soft-focus hills; a rustic wooden post; a warm Mediterranean golden tone over the landscape.",
+    "outfit": {
+      "style_brief": "Breezy summer sundress, sun-warmed elegance.",
+      "female": "A butter-yellow linen midi sundress with a square neckline and a soft tie waist, woven espadrilles, a straw sun hat in the free hand, layered fine gold necklaces, hair in loose waves, glowy bronzed skin.",
+      "male": "A white linen short-sleeve shirt with rolled sleeves over tan linen trousers, leather sandals, sunglasses tucked in the collar, hair lightly tousled, warm relaxed tan."
+    },
+    "pose": "Standing between the vine rows at a three-quarter angle, looking down at the box held at chest with a serene sunlit smile, vines receding behind.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand holds a straw hat at the side"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face near the top edge, four fingers wrapping the back, the box held vertically and tilted to catch the warm afternoon sun.",
+    "lighting": "Warm directional afternoon sun from the right, a golden wash across the vines and the face, a warm rim on the shoulder and box, soft blue sky fill.",
+    "mood": "serene Mediterranean afternoon",
+    "palette": "butter yellow, vine green, warm gold, soft hill haze",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "coworking_loft_hold_48",
+    "category": "coworking",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A bright industrial coworking loft; exposed brick and black-framed windows; a long communal wood table with laptops in soft focus; hanging Edison bulbs; leafy plants and a clean modern vibe.",
+    "outfit": {
+      "style_brief": "Smart-casual modern workwear, polished and current.",
+      "female": "A tailored sage-green blazer over a white ribbed tank, cream wide-leg trousers, pointed flats, fine gold jewellery, hair in a low sleek twist, polished daytime makeup.",
+      "male": "A light-blue oxford shirt with sleeves rolled, navy chinos, clean leather sneakers, a slim watch, hair neatly styled, sharp casual look."
+    },
+    "pose": "Standing beside the communal table at a three-quarter angle, one hand resting on the table edge, looking toward the camera with a confident easy smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "left",
+      "free_hand_action": "the right hand rests on the table edge"
+    },
+    "grip_or_placement": "Left hand at hip level, the box held horizontally in a relaxed pinch - thumb on the top edge, fingers under the bottom face, the front face angled three-quarters to the camera.",
+    "lighting": "Bright soft daylight from the large black-framed windows with warm Edison-bulb accents, clean even light on the face, gentle warm highlights, an airy modern tone.",
+    "mood": "modern productive ease",
+    "palette": "sage blazer, cream, warm brick, bulb amber",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "home_gym_mirror_hold_49",
+    "category": "home_gym",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A sleek home gym corner; a large mirror wall; a neat rack of dumbbells and a yoga mat; matte black rubber flooring; soft daylight from a side window; a clean minimal setup.",
+    "outfit": {
+      "style_brief": "Matched modern activewear, fresh and capable.",
+      "female": "A dusty-lavender seamless sports bra with matching high-waist leggings, low socks and clean trainers, hair in a high sleek ponytail, small studs, fresh no-makeup glow.",
+      "male": "A slate fitted training tank with matching shorts, low socks and trainers, hair short and neat, a fresh capable look."
+    },
+    "pose": "Standing in front of the mirror at a three-quarter angle, one hand on the hip, looking down at the box held at chest with a confident half-smile, the reflection visible.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests on the hip"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face, index and middle fingers on the back, ring and pinky tucked under, the box held vertically with the front face to the camera (not toward the mirror).",
+    "lighting": "Soft daylight from a side window, clean even light on the face and box, a gentle reflected fill from the mirror, a neutral fresh tone.",
+    "mood": "capable, fresh, focused",
+    "palette": "dusty lavender, slate, matte black, soft daylight",
+    "framing": "medium close-up (chest up, reflection behind)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "walk_in_closet_selfie_hold_50",
+    "category": "closet",
+    "archetype": "held_with_phone",
+    "difficulty": "medium",
+    "scene": "A luxe walk-in closet; backlit shelves of neatly arranged clothes and shoes; a full-length mirror; a soft upholstered bench; warm shelf lighting and a soft rug; an elegant getting-ready space.",
+    "outfit": {
+      "style_brief": "Elevated loungewear and getting-ready, soft and chic.",
+      "female": "A silky champagne camisole with matching wide tailored lounge trousers and a soft open robe-cardigan, delicate gold jewellery, hair half-up with soft waves, polished soft makeup.",
+      "male": "A fine charcoal knit short-sleeve with relaxed tailored lounge trousers, leather slides, a simple chain, hair styled, clean groomed look."
+    },
+    "pose": "Standing before the full-length mirror at a three-quarter angle, holding the phone up for a mirror selfie, looking at the phone with a soft self-assured smile.",
+    "hand_assignment": {
+      "phone_hand": "right",
+      "product_hand": "left",
+      "free_hand_action": "the right hand holds the phone for the mirror selfie"
+    },
+    "grip_or_placement": "Left hand at chest level presenting the box toward the mirror so its front face reads in the reflection: thumb on the front face, four fingers behind, the box vertical.",
+    "lighting": "Warm shelf lighting wrapping the space, a soft flattering glow on the face, gentle warm highlights on the silk and box, a cozy luxe tone.",
+    "mood": "elevated getting-ready calm",
+    "palette": "champagne silk, charcoal, warm shelf gold, soft neutral",
+    "framing": "medium full (mid-thigh up, mirror reflection)",
+    "camera_height": "chest level (mirror selfie)"
+  },
+  {
+    "id": "spa_relax_room_hold_51",
+    "category": "spa",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A serene spa relaxation room; a low cushioned daybed with rolled towels; smooth stones and a small bamboo water feature; soft diffused light and sheer drapes; a calm muted palette.",
+    "outfit": {
+      "style_brief": "Plush spa robe, tranquil and clean.",
+      "female": "A plush ivory waffle spa robe loosely tied with a soft V-neckline and a thin towel-wrap headband, bare face fresh and dewy, no jewellery, serene calm skin.",
+      "male": "A plush grey waffle spa robe loosely tied, hair pushed back and slightly damp, a clean fresh face, a tranquil relaxed look."
+    },
+    "pose": "Seated on the edge of the daybed at a three-quarter angle, posture relaxed and upright, looking down at the box held at chest with a serene calm smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests softly in the lap"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb flat on the front face, four fingers wrapping the back edge, the box held vertically with the front face gently to the camera.",
+    "lighting": "Soft diffused spa light through sheer drapes, a gentle even wrap on the face and box, a warm-neutral calm tone, no harsh shadow.",
+    "mood": "tranquil spa calm",
+    "palette": "ivory, soft grey, warm stone, muted sage",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "sunroom_morning_hold_52",
+    "category": "sunroom",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A bright sunroom in the morning; wicker furniture with cream cushions; a wall of windows framing a leafy garden; a few potted palms; sheer light flooding in; a relaxed bright space.",
+    "outfit": {
+      "style_brief": "Soft knit loungewear, easy morning glow.",
+      "female": "A soft oatmeal knit lounge set of a relaxed tee and wide pants, bare feet, hair in a loose low bun with soft pieces out, a thin gold pendant, fresh morning skin.",
+      "male": "A heather-grey knit lounge tee with matching soft joggers, bare feet, hair softly tousled, an easy relaxed morning look."
+    },
+    "pose": "Standing by the sunroom windows at a three-quarter angle, weight relaxed on one hip, looking down at the box held at waist with a soft morning smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "left",
+      "free_hand_action": "the right hand is wrapped loosely around a warm mug held low"
+    },
+    "grip_or_placement": "Left hand at waist level: the box held horizontally - thumb on the top edge, fingers under the bottom face, the front face angled three-quarters to the camera.",
+    "lighting": "Bright soft morning daylight flooding through the windows, a clean airy wrap on the face and box, a gentle warm garden-green bounce, a fresh tone.",
+    "mood": "easy bright morning",
+    "palette": "oatmeal, heather grey, cream wicker, garden green",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "podcast_studio_hold_53",
+    "category": "studio",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A warm modern podcast studio; a suspended microphone on a boom arm in soft focus; acoustic foam panels and warm wood accents; a low amber key light and a subtle teal accent glow; a cozy creator space.",
+    "outfit": {
+      "style_brief": "Relaxed creative-smart, warm and current.",
+      "female": "A rust ribbed mock-neck top with high-waist dark wide-leg trousers, layered fine gold necklaces, over-ear headphones around the neck, hair in soft waves, warm-toned natural makeup.",
+      "male": "A forest-green crewneck over a collared tee, dark relaxed trousers, a slim watch, headphones around the neck, hair neatly tousled, warm easy look."
+    },
+    "pose": "Seated at the studio desk at a three-quarter angle with the mic to the side, leaning slightly toward the camera, looking down at the box held at chest with an engaged warm smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests on the desk near the headphones"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face, index and middle fingers on the back, ring and pinky tucked under, the box held vertically toward the camera.",
+    "lighting": "A warm amber key from one side with a subtle teal accent rim from behind, moody cinematic creator light, a warm highlight on the face and box, a soft dark surround.",
+    "mood": "warm engaged creator energy",
+    "palette": "rust, forest green, warm wood amber, teal accent",
+    "framing": "medium close-up (chest up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "pottery_studio_hold_54",
+    "category": "pottery",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A rustic ceramics studio; shelves of drying clay pieces in soft focus; a pottery wheel with clay dust; wooden tables and aprons on hooks; warm diffused daylight and an earthy textured atmosphere.",
+    "outfit": {
+      "style_brief": "Earthy artisan wear with an apron, grounded and tactile.",
+      "female": "A terracotta linen apron over a cream long-sleeve tee with sleeves pushed up and slim dark trousers, a smudge of clay, bare forearms, hair in a loose bun with strands out, simple studs, fresh skin.",
+      "male": "A canvas apron over an olive henley with rolled sleeves and relaxed trousers, a smudge of clay, hair tousled, light stubble, a grounded artisan look."
+    },
+    "pose": "Standing by the wheel at a three-quarter angle, one hand resting near the clay, looking toward the camera with a warm grounded half-smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests near the pottery wheel"
+    },
+    "grip_or_placement": "Right hand at waist level, palm slightly up, the box held flat and steadied by the thumb, the front face angled up three-quarters to the camera, an unposed tactile hold.",
+    "lighting": "Warm diffused daylight through a side window, a soft earthy wrap on the face and box, a gentle warm shadow, a textured grounded tone.",
+    "mood": "grounded, tactile, artisan",
+    "palette": "terracotta, cream, clay grey, warm earth",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "botanical_conservatory_hold_55",
+    "category": "garden",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A grand glass botanical conservatory; lush tropical plants and palms arching overhead; a stone path and an ornate iron bench; sun streaming through the glass dome creating a verdant glow; a humid green atmosphere.",
+    "outfit": {
+      "style_brief": "A floral summer dress / crisp warm-weather smart, fresh.",
+      "female": "A soft floral-print midi tea dress with short flutter sleeves and a defined waist, strappy flat sandals, delicate gold jewellery, hair in soft loose waves, glowy natural makeup.",
+      "male": "A crisp white short-sleeve linen shirt with sage tailored shorts, leather loafers, sunglasses tucked in, hair lightly styled, a fresh warm-weather look."
+    },
+    "pose": "Standing on the conservatory path among the greenery at a three-quarter angle, looking down at the box held at chest with a fresh serene smile, palms arching behind.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand brushes a frond at the side"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face, four fingers wrapping the back edge, the box held vertically toward the camera in the green light.",
+    "lighting": "Bright daylight streaming through the glass dome, dappled verdant highlights, a soft green bounce from the foliage, a fresh luminous tone.",
+    "mood": "fresh, verdant, serene",
+    "palette": "floral pastels, lush green, glass-bright white, warm stone",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "balcony_espresso_morning_hold_56",
+    "category": "balcony",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "A small Mediterranean-style apartment balcony in the morning; a wrought-iron railing with trailing potted geraniums; a tiny bistro table; warm terracotta buildings and soft hills in the soft-focus distance; gentle morning sun.",
+    "outfit": {
+      "style_brief": "Soft morning robe and linen loungewear, warm and unhurried.",
+      "female": "A blush satin short robe loosely tied over a white camisole and soft shorts, bare feet, hair in a loose low bun with soft pieces out, a thin gold necklace, fresh dewy morning skin.",
+      "male": "An open oatmeal linen short-sleeve shirt over a white tee with soft drawstring shorts, bare feet, hair softly tousled, an unhurried warm look."
+    },
+    "pose": "Standing at the balcony railing at a three-quarter angle, one hand on the iron rail, looking down at the box held up at chest with a soft unhurried morning smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests on the iron railing"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face near the top, four fingers wrapping the back, the box held vertically catching the soft warm morning light.",
+    "lighting": "Soft warm morning sun from the side, a gentle golden wrap on the face and box, a warm terracotta bounce from the buildings, a fresh airy tone.",
+    "mood": "warm unhurried Mediterranean morning",
+    "palette": "blush satin, oatmeal linen, terracotta, soft morning gold",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "rooftop_yoga_sunrise_hold_57",
+    "category": "yoga",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "An open rooftop terrace at sunrise; a yoga mat unrolled on wooden decking; a soft skyline silhouette and pastel dawn sky behind; a couple of potted grasses; calm fresh morning air.",
+    "outfit": {
+      "style_brief": "Matched soft yoga set, calm sunrise energy.",
+      "female": "A sage seamless yoga set with a supportive bra and high-waist leggings, bare feet on the mat, hair in a soft high bun with loose pieces, small studs, a fresh dewy glow.",
+      "male": "A soft heather training tee with matching joggers, bare feet on the mat, hair short and neat, a calm fresh morning look."
+    },
+    "pose": "Standing at the top of the mat at a three-quarter angle in a grounded relaxed stance, looking down at the box held at chest with a serene sunrise smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests softly over the heart"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb flat on the front face, four fingers wrapping the back edge, the box held vertically and tilted up to the soft dawn light.",
+    "lighting": "Soft warm sunrise from a low angle behind, a gentle golden rim around the hair and shoulders, a cool pastel sky fill, a calm luminous tone.",
+    "mood": "calm sunrise intention",
+    "palette": "sage, heather, pastel dawn, warm gold rim",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level, slightly low"
+  },
+  {
+    "id": "marina_sailboat_deck_hold_58",
+    "category": "marina",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A sunny marina; a clean white sailboat deck with teak trim; masts and moored boats in soft focus behind; sparkling blue water and a clear sky; a crisp nautical bright scene.",
+    "outfit": {
+      "style_brief": "Crisp nautical casual, bright and fresh.",
+      "female": "A navy-and-white striped boatneck top with white tailored shorts, canvas deck shoes, gold hoops and a fine chain, hair in a low pony with a few loose pieces, fresh bronzed skin.",
+      "male": "A white polo with navy tailored shorts, canvas boat shoes, sunglasses, a steel watch, hair neatly tousled, a crisp tanned look."
+    },
+    "pose": "Standing on the sailboat deck at a three-quarter angle, one hand on a railing, looking toward the camera with a bright fresh smile, water sparkling behind.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests on a deck railing"
+    },
+    "grip_or_placement": "Right hand at hip level, the box held horizontally in a relaxed pinch - thumb on the top edge, fingers under, the front face angled three-quarters to the camera.",
+    "lighting": "Bright clean midday sun with sparkling water highlights, crisp even light on the face and box, a fresh cool-bright tone, a light warm bounce from the teak.",
+    "mood": "bright crisp nautical",
+    "palette": "navy, white, teak, sparkling sea blue",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "music_room_piano_hold_59",
+    "category": "music",
+    "archetype": "held_product_high",
+    "difficulty": "medium",
+    "scene": "An elegant music room; a glossy grand piano catching soft light; tall windows with sheer curtains; a few framed prints and a vase of fresh flowers; a refined warm-neutral space.",
+    "outfit": {
+      "style_brief": "Refined smart-casual elegance, poised.",
+      "female": "A cream fine-knit sleeveless top with high-waist tailored wide-leg trousers, pointed flats, delicate gold jewellery, hair in soft waves with a side part, polished soft makeup.",
+      "male": "A soft camel fine-gauge sweater over a collared shirt, tailored trousers, leather loafers, a slim watch, hair neatly styled, a poised refined look."
+    },
+    "pose": "Standing beside the grand piano at a three-quarter angle, one hand resting lightly on the piano lid, looking down at the box held at chest with a poised soft smile.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand rests on the piano lid"
+    },
+    "grip_or_placement": "Right hand at chest level: thumb on the front face, index and middle fingers on the back, ring and pinky tucked under, the box held vertically toward the camera.",
+    "lighting": "Soft daylight through sheer curtains with gentle highlights off the glossy piano, refined even light on the face and box, a warm-neutral elegant tone.",
+    "mood": "poised refined elegance",
+    "palette": "cream, camel, glossy black piano, warm neutral",
+    "framing": "three-quarter (waist up)",
+    "camera_height": "chest level"
+  },
+  {
+    "id": "backyard_stringlights_evening_hold_60",
+    "category": "outdoor",
+    "archetype": "held_product_low",
+    "difficulty": "medium",
+    "scene": "A cozy backyard patio at blue-hour twilight; warm string lights crisscrossing overhead; a glowing fire pit with low seating and soft throws; a deep blue dusk sky; potted plants around the edges.",
+    "outfit": {
+      "style_brief": "Cozy evening layers, warm and relaxed.",
+      "female": "A cream chunky-knit cardigan over a fitted tee and dark jeans, ankle boots, hair down in soft waves, warm-toned natural makeup, a cozy glow.",
+      "male": "A charcoal shawl-collar knit over a tee, dark jeans, suede boots, hair softly tousled, light stubble, a relaxed evening look."
+    },
+    "pose": "Standing near the fire pit at a three-quarter angle, looking down at the box held at waist with a warm relaxed evening smile, string lights glowing above.",
+    "hand_assignment": {
+      "phone_hand": null,
+      "product_hand": "right",
+      "free_hand_action": "the left hand is tucked into the cardigan pocket"
+    },
+    "grip_or_placement": "Right hand at waist level: the box held horizontally - thumb on the top edge, fingers under the bottom face, the front face angled three-quarters to the camera, catching the warm string-light glow.",
+    "lighting": "A warm string-light and fire-pit glow from above and below mixing with deep-blue dusk ambient, a warm key on the face and box, a cool blue rim from the twilight sky.",
+    "mood": "cozy warm twilight gathering",
+    "palette": "cream, charcoal, warm string-light gold, deep dusk blue",
+    "framing": "medium full (mid-thigh up)",
+    "camera_height": "chest level"
+  }
+]

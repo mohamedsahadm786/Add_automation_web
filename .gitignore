@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+.vite
+*.local
+.DS_Store
+Thumbs.db
+
+# editor
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# supabase local cli state
+supabase/.temp
+supabase/.branches

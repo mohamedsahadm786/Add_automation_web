@@ -1,0 +1,1489 @@
+{
+  "name": "Final_Flow_Worker",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "// ════════════════════════════════════════════════════════════════════\n//  ▼▼▼  CONFIG — EDIT EVERY VALUE IN THIS BLOCK, THEN SAVE  ▼▼▼\n// ════════════════════════════════════════════════════════════════════\nconst CONFIG = {\n  // ---- API KEYS ----\n  FAL_KEY:         'YOUR_FAL_KEY_HERE',\n  ANTHROPIC_KEY:   'YOUR_ANTHROPIC_KEY_HERE',\n\n  // ---- SUPABASE ----\n  // ---- SUPABASE ----\n    SUPABASE_URL:   'https://hgmvgnsvxlzcylfwttlc.supabase.co',   // no trailing slash\n  SUPABASE_SECRET: 'YOUR_SUPABASE_SECRET_HERE',\n\n\n  // ---- PRODUCT REFERENCE IMAGE FILE IDS (plain IDs, not URLs) ----\n PRODUCT_FILE_IDS: [\n    '10i08pjUJeFojyPXet4_AojZ9uSVcN1Cu',\n    '1Hgtdkqxz1Se0pXyN2LKiZG5u8BL34NIZ'\n  ],\n\n  \n      // ---- GOOGLE DRIVE FOLDER IDS (open the folder, copy the id in the URL)\n  DRIVE_PERSONAS_FOLDER_ID: '1r5z9i2XTfBM-QzVqDUVFidaVJjv_FXoJ',\n  DRIVE_OUTPUTS_FOLDER_ID:  '1Y-qCUx4MuK2FC_puRtSsNxtwPKi6wApI',\n\n\n  // ---- MODELS ----\n  ANTHROPIC_MODEL: 'claude-sonnet-4-6',     // writes the image prompts (fast + excellent)\n  QC_MODEL:        'claude-sonnet-4-6',     // vision QC\n  FAL_T2I_MODEL:   'fal-ai/nano-banana-pro',\n  FAL_EDIT_MODEL:  'fal-ai/nano-banana-pro/edit',\n\n  // ---- GENERATION SETTINGS ----\n  PERSONA_ASPECT:  '3:4',\n  SCENE_ASPECT:    '9:16',\n  QC_PASS_SCORE:   60,     // lenient QC: pass unless a real defect drags score below this\n\n  // ============================================================\n  //  RUN CONTROL  -  every run does FULL video creation\n  //  (scene image -> QC -> video). There is no image-only mode.\n  // ============================================================\n\n  // ONE_PER_PERSONA:\n  //   true  -> EVERY persona is processed this run. Each persona gets its\n  //            next N undone scenarios (N = MAX_VIDEOS_PER_RUN). Max\n  //            diversity: 10 personas, N=1 -> 10 videos, each a different\n  //            persona. No waiting for a persona to finish all 30.\n  //   false -> ONLY personas with NO video yet (newly added accounts\n  //            catching up). Each gets its next N scenarios.\n  ONE_PER_PERSONA: true,\n\n  // TIKTOK_ID:  targeting override. When set, ONE_PER_PERSONA is ignored.\n  //   false              -> not used\n  //   'tt_abc'           -> only that one account's persona\n  //   'tt_abc, tt_def'   -> several accounts (comma-separated tiktok_id values)\n  //   Each targeted persona gets its next N undone scenarios.\n  TIKTOK_ID: 'sahad123',\n\n  // Scenarios processed PER PERSONA this run (lowest undone scenario ids\n  // first). Total videos = (personas selected) x this number.\n  // Keep the total within the n8n 40-min execution limit (~8-10 videos).\n  MAX_VIDEOS_PER_RUN:  1,\n\n  // QC retry loop: times ONE scene image is regenerated within a run when it\n  // fails QC. If still not clean after this many attempts, that SCENARIO is\n  // skipped (no video for it) and the planner moves to the persona's next\n  // scenario. Re-run later to retry skipped scenarios.\n  MAX_QC_ATTEMPTS:  3,\n\n  // ---- PHASE C: VIDEO (Seedance 2.0 on fal.ai) ----\n  // The brand/product .json you place in your Drive 'information' folder.\n\n  INFO_FILE_ID:        '1aOB0XqfaMiKzWPbKPuZnkxsvCLzq7lAi',\n  FAL_VIDEO_MODEL:     'bytedance/seedance-2.0/reference-to-video',\n  VIDEO_DURATION:      '15',         // seconds, string. Seedance native range \"4\"-\"15\".\n  VIDEO_RESOLUTION:    '1080p',      // '720p' or '1080p'\n  VIDEO_ASPECT:        '9:16',\n  VIDEO_GENERATE_AUDIO: true,        // native audio + lip-sync\n\n  // ============================================================\n  //  PHASE D  -  TikTok auto-post\n  // ============================================================\n  TIKTOK_AUTO_POST:    false,                 // true -> Phase D runs after Phase C\n  TIKTOK_CLIENT_KEY:   'PASTE_tiktok_client_key',\n  TIKTOK_CLIENT_SECRET:'PASTE_tiktok_client_secret',\n  TIKTOK_POST_PRIVACY: 'SELF_ONLY',           // 'SELF_ONLY' until app is audited, then 'PUBLIC_TO_EVERYONE'\n};\n// ════════════════════════════════════════════════════════════════════\nreturn [{ json: CONFIG }];\n"
+      },
+      "id": "4087b56e-b4e8-4d8a-b7bb-a37923498149",
+      "name": "Config",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1664,
+        656
+      ]
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "0a117aa5-4280-4020-8015-f829882d2148",
+      "name": "Worker Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1872,
+        656
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $('Worker Trigger').all();\nconst it = (items && items[0] && items[0].json) || $input.first().json || {};\nreturn [{ json: it }];"
+      },
+      "id": "430cc216-c4fd-4f27-9959-d182b720a3c7",
+      "name": "Normalise Job",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1424,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loads every persona from Supabase, with its tiktok_account joined.\nconst cfg = $('Config').first().json;\nconst H = { apikey: cfg.SUPABASE_SECRET };\nconst personas = await this.helpers.httpRequest({\n  method: 'GET', url: cfg.SUPABASE_URL + '/rest/v1/personas?select=*,tiktok_accounts(*)', headers: H, json: true });\nif (!personas || personas.length === 0) throw new Error('No personas found in Supabase yet.');\nreturn personas.map(p => ({ json: p }));\n"
+      },
+      "id": "f72cf4a8-c6fe-4f9f-8e11-4081ae627daf",
+      "name": "B: Get Personas",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// One item per Drive file to download: unique persona images + product images.\nconst cfg = $('Config').first().json;\nconst files = []; const seen = new Set();\nfor (const item of $input.all()) {\n  const fid = item.json.drive_file_id;\n  if (fid && !seen.has(fid)) { seen.add(fid); files.push({ json: { fileId: fid, kind: 'persona' } }); }\n}\nfor (const pid of (cfg.PRODUCT_FILE_IDS || [])) {\n  if (pid && !seen.has(pid)) { seen.add(pid); files.push({ json: { fileId: pid, kind: 'product' } }); }\n}\nif (files.length === 0) throw new Error('No reference files to download.');\nreturn files;\n"
+      },
+      "id": "a4253641-59e6-463b-b91a-31db763812ba",
+      "name": "B: List Reference Files",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        320,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.fileId }}"
+        },
+        "options": {}
+      },
+      "id": "435c9603-c4ca-4529-ac9e-74abfa503d81",
+      "name": "B: Download Reference Images",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        544,
+        -96
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "35ZnLJ9SfEawS46I",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Converts every downloaded reference image into a base64 data URI.\nconst cfg = $('Config').first().json;\nconst productSet = new Set(cfg.PRODUCT_FILE_IDS || []);\nconst items = $input.all();\nconst library = {}; const products = [];\nfor (let i = 0; i < items.length; i++) {\n  const j = items[i].json || {};\n  const id = j.id || j.fileId;\n  if (!items[i].binary || !items[i].binary.data) continue;\n  const buf = await this.helpers.getBinaryDataBuffer(i, 'data');\n  const mime = (items[i].binary.data.mimeType) || 'image/png';\n  const uri = 'data:' + mime + ';base64,' + buf.toString('base64');\n  if (id) library[id] = uri;\n  if (productSet.has(id)) products.push(uri);\n}\nreturn [{ json: { library, products } }];\n"
+      },
+      "id": "2cffa8a0-92ba-4b4a-9ddb-0ff82c4cb65a",
+      "name": "B: Build Image Library",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        752,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Worker-mode job emitter. Reads the single job directly from Worker Trigger.\nconst wt = $('Worker Trigger').all();\nconst j = (wt && wt[0] && wt[0].json) || $('Normalise Job').first().json || {};\nif (j.persona_id == null) {\n  throw new Error('Worker received no job data. Orchestrator must pass {persona_id, scenario_id, scenario, ...}. Got: ' + JSON.stringify(j));\n}\nreturn [{ json: {\n  persona_id: j.persona_id,\n  persona_drive_file_id: j.persona_drive_file_id,\n  gender: j.gender || 'female',\n  country: j.country || '',\n  age: j.age != null ? j.age : null,\n  scenario: j.scenario || { id: j.scenario_id }\n} }];"
+      },
+      "id": "1cb4ebf7-258d-44c9-9c3f-8803af6fbfa4",
+      "name": "B: Build Job List",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Per job: resolves the gender-correct outfit and builds the Anthropic\n// request that writes the Nano Banana edit prompt.\nconst cfg = $('Config').first().json;\nconst SCENE_WRITER_SYSTEM = `You are an elite photographic art director and prompt engineer. You write ONE production prompt for Google's Nano Banana Pro (Gemini 3 Pro Image) image-EDIT model, which composes a new photograph out of reference images.\\n\\nWHAT YOU ARE GIVEN\\n- A SCENE BRIEF in JSON (scene, outfit, pose, hand grip, lighting, mood, palette, framing, camera).\\n- The editor receives REFERENCE IMAGES in this fixed order: image 1 = THE PERSON (a real individual - the locked identity). image 2 onward = THE PRODUCT, a small rectangular box with a labelled front face, shown from several angles.\\n\\nYOUR OUTPUT\\n- Output ONLY the final prompt text. No preamble, no quotes, no markdown, no labels, no commentary.\\n- Write rich, flowing, photographic prose - one to three dense paragraphs. Nano Banana Pro has a very large context window and rewards precise, concrete specificity, so never be terse.\\n\\nNON-NEGOTIABLE RULES\\n\\n1. REFERENCE RELATIONSHIP. Open by stating exactly how to use the references: take the exact person from image 1 and the exact product from the remaining images, and place them together in one new photograph.\\n\\n2. IDENTITY LOCK. Command the model to preserve, with zero alteration, the person's face, facial structure and bone structure, eye colour and shape, nose, jawline, complexion and exact skin tone, and their natural hair colour, length and texture, exactly as in image 1. Only hair styling, clothing, expression and pose change. The face must be unmistakably the same individual.\\n\\n3. PRODUCT LOCK. Command the model to reproduce the product exactly as in the product images - identical shape, proportions, colours, label artwork, logo and text. It is a real physical object placed in the scene; never redesigned, relabelled, warped or invented.\\n\\n4. TRANSLATE THE BRIEF FAITHFULLY. Convert every field of the scene brief into vivid visual description: the environment, the outfit (use exactly the gender-correct outfit text supplied), the hair styling, the precise body pose, the exact hand-and-grip mechanics, the lighting setup, the colour palette, the camera framing and the camera height.\\n\\n5. HANDS AND GRIP. Describe the hands with anatomical precision: a natural human hand with exactly five correctly proportioned fingers, and a believable, physically plausible grip on the product exactly as the brief specifies. The product sits in or on the hand with correct contact and occlusion - solidly held.\\n\\n6. PHOTOREALISM. State it is a real photograph: full-frame camera, a fast prime lens around 35-50mm, aperture near f/2.0 giving a natural shallow depth of field, authentic colour and true-to-life contrast. Demand REAL human skin with visible pores, fine texture, faint natural lines and a natural sheen. The result should read as a genuine, high-quality user-generated lifestyle photo for social media - authentic and candid in feel, yet crisp and well exposed.\\n\\n7. FRAMING. The final image is a vertical 9:16 frame. State the framing and crop from the brief and keep both the person and the product clearly visible and well composed, with the product's labelled front face oriented toward the camera as the grip and placement description requires.\\n\\n8. POSITIVE FRAMING ONLY. Describe only what IS present. Never use negations - Nano Banana does not reliably honour them. Any correction must be phrased as the desired positive state.\\n\\nWrite the single best prompt you can. Every word must earn its place.`;\nreturn $input.all().map((it, i) => {\n  const job = it.json;\n  const sc = job.scenario;\n  const outfit = (sc.outfit && (sc.outfit[job.gender] || sc.outfit.female || sc.outfit.male)) || '';\n  const styleBrief = (sc.outfit && sc.outfit.style_brief) || '';\n  const brief = JSON.stringify({\n    scene: sc.scene, outfit_style_brief: styleBrief, outfit: outfit,\n    pose: sc.pose, hand_assignment: sc.hand_assignment, grip_or_placement: sc.grip_or_placement,\n    lighting: sc.lighting, mood: sc.mood, palette: sc.palette,\n    framing: sc.framing, camera_height: sc.camera_height, aspect_ratio: cfg.SCENE_ASPECT\n  }, null, 2);\n  const userMsg = 'SCENE BRIEF (JSON):\\n' + brief\n    + '\\n\\nReference images given to the editor, in order: image 1 = the PERSON (identity reference), '\n    + 'image 2 onward = the PRODUCT shown from multiple angles.\\n\\nWrite the Nano Banana edit prompt now.';\n  return { json: {\n    job: job, scene_brief: brief,\n    _url: 'https://api.anthropic.com/v1/messages',\n    _headers: { 'x-api-key': cfg.ANTHROPIC_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },\n    _body: { model: cfg.ANTHROPIC_MODEL, max_tokens: 1800, system: SCENE_WRITER_SYSTEM, messages: [{ role: 'user', content: userMsg }] }\n  }, pairedItem: { item: i } };\n});\n"
+      },
+      "id": "41e43017-923f-4d8d-bb35-fb8bab76b124",
+      "name": "B: Build Scene Prompt Req",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        336,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json._url }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify($json._headers) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json._body) }}",
+        "options": {
+          "timeout": 230000
+        }
+      },
+      "id": "cddf22d9-a3dc-4a67-9c1f-392b21e27b3b",
+      "name": "B: Write Scene Prompt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        560,
+        112
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parses the Anthropic scene prompt and creates the uniform retry-loop item.\n// Runs ONCE (before the loop), so index-correlation with Build Scene Prompt Req is safe.\nconst prev = $('B: Build Scene Prompt Req').all();\nconst items = $input.all();\nconst out = [];\nfor (let i = 0; i < items.length; i++) {\n  const anth = items[i].json;\n  const carried = prev[i].json;\n  const prompt = (anth.content || []).filter(b => b.type === 'text').map(b => b.text).join('').trim();\n  if (!prompt) continue;      // scene-prompt API errored for this job - skip it, retried next run\n  out.push({ json: {\n    job: carried.job,\n    base_prompt: prompt,      // the original prompt, never mutated - retries rebuild from this\n    prompt: prompt,           // the prompt actually sent this attempt\n    corrective_history: [],   // positive correctives accumulated across attempts\n    attempt: 1\n  }, pairedItem: { item: i } });\n}\nreturn out;\n"
+      },
+      "id": "0df103af-ec6c-4377-9c25-fc4c49821f97",
+      "name": "B: Prep Generation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the FAL nano-banana-pro/edit request from the carried loop item.\n// Receives items from B: Prep Generation (attempt 1) OR from the QC retry\n// loop (B: QC Passed? false branch) - both carry the same item shape.\nconst cfg = $('Config').first().json;\nconst lib = $('B: Build Image Library').first().json;\nreturn $input.all().map((it, i) => {\n  const d = it.json;\n  const job = d.job;\n  const personaUri = lib.library ? lib.library[job.persona_drive_file_id] : null;\n  const refUris = [personaUri].concat(lib.products || []).filter(Boolean);\n  return { json: {\n    job: job, prompt: d.prompt, base_prompt: d.base_prompt,\n    corrective_history: d.corrective_history || [], attempt: d.attempt || 1,\n    _url: 'https://fal.run/' + cfg.FAL_EDIT_MODEL,\n    _headers: { 'Authorization': 'Key ' + cfg.FAL_KEY, 'content-type': 'application/json' },\n    _body: { prompt: d.prompt, image_urls: refUris, num_images: 1, output_format: 'png', aspect_ratio: cfg.SCENE_ASPECT }\n  }, pairedItem: { item: i } };\n});\n"
+      },
+      "id": "f4afdd6e-2a9c-428f-8ba8-bf9e77d66ae2",
+      "name": "B: Build FAL Edit Req",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        80,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json._url }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify($json._headers) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json._body) }}",
+        "options": {
+          "timeout": 230000
+        }
+      },
+      "id": "17457c78-baed-4fd1-a886-3756559efa75",
+      "name": "B: Generate Scene Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        336,
+        304
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the QC request. The generated image is passed to Claude BY URL\n// (Anthropic supports url image sources) - it is never downloaded or held as\n// base64 here, so retry attempts do not pile up image data in memory.\n// Only the product reference images (from Drive) are sent as base64.\nconst cfg = $('Config').first().json;\nconst QC_SYSTEM = `You are a practical quality-control reviewer for AI-generated UGC advertising images. You are shown a GENERATED IMAGE under review, followed by one or more REFERENCE PRODUCT images showing what the real product box actually looks like.\n\nJudge the GENERATED IMAGE on ONLY the three points below. Be lenient on everything else.\n\n1. HUMAN ANATOMY. The person must be anatomically plausible: each visible hand has five well-formed fingers with no extra, missing or fused fingers; no extra or missing arms or legs; no warped or duplicated body parts; and a natural human face with realistic eyes, ears, mouth and teeth. Fail only for clear anatomical breakage.\n\n2. PRODUCT RESEMBLANCE - this point is STRICT. Compare the product shown in the GENERATED image against the REFERENCE PRODUCT image(s). The product in the generated image must clearly be the SAME product, at an estimated 85 percent visual resemblance or higher. That means the same overall box shape and proportions, the same label layout, the same colours, and the same text and branding as the reference. PASS the product only when it is convincingly the same product at roughly 85 percent likeness or better. FAIL it when the product is missing, looks like a different or generic box, has a label, colours, text or shape that clearly differ from the reference, or is melted, garbled or duplicated. Do NOT judge the product orientation, angle, tilt, which side faces the camera, or where it sits in the frame - horizontal, vertical, tilted, near or far are all fine. What matters is that the product itself resembles the real one.\n\n3. BASIC REALISM. The person should read as a real human. Skin only needs to be roughly natural - about 70 percent realistic or better is acceptable; allow minor imperfection and ordinary AI softness. Fail only for severely plastic, waxy or melted skin or faces, or gross artefacts such as floating objects, merged bodies or badly garbled text.\n\nDO NOT CHECK AND DO NOT FAIL FOR: the scene, background, outfit, pose, framing, crop, camera angle, lighting or colour mood; the product orientation or placement; or any difference from an imagined brief. Judge ONLY the three points above.\n\nSCORING: give an integer score from 0 to 100. Start at 100 and subtract only for the three defect types above. An image with sound anatomy, a product at 85 percent-or-better resemblance to the reference, and a roughly real-looking person should score high and pass.\n\nCORRECTIVE - CRITICAL RULE. When (and only when) the image FAILS, also write a 'corrective': one short, concrete instruction describing the CORRECT state you want, phrased PURELY in the positive. The model that re-generates the image is Nano Banana, which has no mechanism for negative instructions - telling it what NOT to do achieves nothing or backfires. Never write a negation; always state the positive thing to do instead. Examples - Wrong: do not add a sixth finger. Right: render each hand with exactly five natural, correctly proportioned fingers. Wrong: the product should not look generic. Right: render the product box so it closely matches the reference product image - the same label layout, the same colours, the same text and the same proportions. If the image passes, set corrective to an empty string.\n\nOUTPUT - return ONLY a single minified JSON object, no markdown and no commentary, in exactly this shape:\n{\"pass\": <true or false>, \"score\": <0-100 integer>, \"product_resemblance\": <0-100 integer estimate>, \"worst_defect\": \"<the single clearest real defect, or empty string>\", \"corrective\": \"<one positive do-this instruction, or empty string>\"}\n\nSet pass to true only when anatomy is sound, product_resemblance is about 85 or higher, and realism is acceptable.`;\nconst lib = $('B: Build Image Library').first().json;\nconst prev = $('B: Build FAL Edit Req').all();\nconst productBlocks = [];\nfor (const uri of (lib.products || [])) {\n  const mm = /^data:([^;]+);base64,(.*)$/.exec(uri || '');\n  if (mm) productBlocks.push({ type: 'image', source: { type: 'base64', media_type: mm[1], data: mm[2] } });\n}\nconst items = $input.all();\nconst out = [];\nfor (let i = 0; i < items.length; i++) {\n  const fal = items[i].json;\n  const carried = prev[i].json;\n  const url = fal && fal.images && fal.images[0] && fal.images[0].url;\n  if (!url) continue;   // FAL produced nothing - dropped, retried on a later run\n  const userContent = [\n    { type: 'text', text: 'GENERATED IMAGE under review:' },\n    { type: 'image', source: { type: 'url', url: url } },\n    { type: 'text', text: 'REFERENCE PRODUCT image(s) - what the real product box looks like:' }\n  ].concat(productBlocks).concat([\n    { type: 'text', text: 'Return ONLY the JSON verdict.' }\n  ]);\n  out.push({ json: {\n    job: carried.job, base_prompt: carried.base_prompt, prompt: carried.prompt,\n    corrective_history: carried.corrective_history || [], attempt: carried.attempt || 1,\n    sceneImageUrl: url,\n    _url: 'https://api.anthropic.com/v1/messages',\n    _headers: { 'x-api-key': cfg.ANTHROPIC_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },\n    _body: { model: cfg.QC_MODEL, max_tokens: 700, system: QC_SYSTEM, messages: [{ role: 'user', content: userContent }] }\n  } });\n}\nreturn out;\n"
+      },
+      "id": "29125abf-fce8-42c5-890d-0cbc938b8009",
+      "name": "B: Build QC Req",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json._url }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify($json._headers) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json._body) }}",
+        "options": {
+          "timeout": 230000
+        }
+      },
+      "id": "8106b9c3-989f-4b86-b0e8-ef9ad4404ae3",
+      "name": "B: QC Check",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        816,
+        304
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parses the QC verdict and decides: finish, or retry with a corrected prompt.\n// Correlates with B: Build QC Req (same loop iteration -> same item count).\nconst cfg = $('Config').first().json;\nconst maxAttempts = cfg.MAX_QC_ATTEMPTS || 3;\nconst passScore = (typeof cfg.QC_PASS_SCORE === 'number') ? cfg.QC_PASS_SCORE : 60;\nconst prev = $('B: Build QC Req').all();\nreturn $input.all().map((it, i) => {\n  const qcResp = it.json;\n  const carried = prev[i].json;\n  let qcText = (qcResp.content || []).filter(b => b.type === 'text').map(b => b.text).join('').trim();\n  let qc;\n  try { qc = JSON.parse(qcText.replace(/```json/gi, '').replace(/```/g, '').trim()); }\n  catch (e) { qc = { pass: false, score: 0, product_resemblance: 0, worst_defect: 'QC verdict unavailable - will retry', corrective: '' }; }\n  const passed = (qc.pass === true) || (typeof qc.score === 'number' && qc.score >= passScore);\n  const attempt = carried.attempt || 1;\n  const exhausted = attempt >= maxAttempts;\n  const done = passed || exhausted;            // leave the loop if passed OR out of attempts\n  // Accumulate the positive correctives. Rebuild the prompt from the ORIGINAL\n  // base_prompt + every corrective so far (all are 'do this' instructions, so\n  // they stack cleanly - this is the Nano Banana positive-framing approach).\n  const history = (carried.corrective_history || []).slice();\n  if (!passed && qc.corrective && history.indexOf(qc.corrective) === -1) history.push(qc.corrective);\n  let nextPrompt = carried.base_prompt;\n  if (history.length) {\n    nextPrompt = carried.base_prompt\n      + '\\n\\nADDITIONAL REQUIREMENTS - render the image so that all of the following are clearly true: '\n      + history.join('  ');\n  }\n  return { json: {\n    job: carried.job,\n    base_prompt: carried.base_prompt,\n    prompt: done ? carried.prompt : nextPrompt,   // retry uses the corrected prompt\n    corrective_history: history,\n    attempt: done ? attempt : attempt + 1,\n    sceneImageUrl: carried.sceneImageUrl,\n    qc_passed: passed,\n    qc_score: (qc.score != null ? qc.score : ''),\n    qc_resemblance: (qc.product_resemblance != null ? qc.product_resemblance : ''),\n    qc_worst: qc.worst_defect || '',\n    _done: done\n  }, pairedItem: { item: i } };\n});\n"
+      },
+      "id": "3f51150e-f0d1-45bb-adfb-30f0b4f779b1",
+      "name": "B: Evaluate QC",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1424471d-3db8-4007-97f1-ec852d93824c",
+              "leftValue": "={{ $json._done }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "82aa7560-ca78-4ee2-8a50-eda8957eb1b0",
+      "name": "B: QC Passed?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        512
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepares the final image binary and DB record fields.\n// The image is downloaded from its FAL URL once, for the image\n// that finished the QC loop. No base64 was carried through the loop.\nconst items = $input.all();\nconst out = [];\nfor (let i = 0; i < items.length; i++) {\n  const d = items[i].json;\n  const job = d.job;\n  const sc = job.scenario;\n  if (!d.sceneImageUrl) continue;\n  const filename = 'scene_p' + job.persona_id + '__' + sc.id + '.png';\n  const raw = await this.helpers.httpRequest({ method: 'GET', url: d.sceneImageUrl, encoding: 'arraybuffer', timeout: 120000 });\n  const binaryData = await this.helpers.prepareBinaryData(Buffer.from(raw), filename, 'image/png');\n  out.push({\n    json: {\n      persona_id: job.persona_id, scenario_id: sc.id, scenario_title: sc.id,\n      qc_status: d.qc_passed ? 'pass' : 'skipped',\n      qc_reason: String((d.qc_worst || (d.qc_passed ? 'ok' : 'unresolved'))\n                 + ' | score ' + (d.qc_score !== '' && d.qc_score != null ? d.qc_score : 'n/a')\n                 + ' | resemblance ' + (d.qc_resemblance !== '' && d.qc_resemblance != null ? d.qc_resemblance : 'n/a')\n                 + ' | attempts ' + d.attempt).slice(0, 400),\n      attempts: d.attempt, prompt_used: d.prompt, scene_filename: filename\n    },\n    binary: { data: binaryData }\n  });\n}\nreturn out;"
+      },
+      "id": "b16168c2-2811-411f-827b-8c2124f92a94",
+      "name": "B: Finalize Scene",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        576,
+        496
+      ]
+    },
+    {
+      "parameters": {
+        "name": "={{ $json.persona_filename || $json.scene_filename || $json.video_filename }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive",
+          "cachedResultName": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1Y-qCUx4MuK2FC_puRtSsNxtwPKi6wApI",
+          "mode": "list",
+          "cachedResultName": "outputs",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1Y-qCUx4MuK2FC_puRtSsNxtwPKi6wApI"
+        },
+        "options": {}
+      },
+      "id": "87c65977-be89-47cb-99b4-6d4ca80aa89b",
+      "name": "B: Upload Scene",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        816,
+        496
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "35ZnLJ9SfEawS46I",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Inserts each generated scene into Supabase outputs (upsert on persona_id+scenario_id).\nconst cfg = $('Config').first().json;\nconst H = { apikey: cfg.SUPABASE_SECRET, 'content-type': 'application/json',\n            Prefer: 'return=representation,resolution=merge-duplicates' };\nconst gens = $('B: Finalize Scene').all().map(i => i.json);\nconst byName = {};\nfor (const g of gens) byName[g.scene_filename] = g;\nconst out = [];\nfor (const item of $input.all()) {\n  const f = item.json;\n  const g = byName[f.name] || {};\n  const row = {\n    persona_id: g.persona_id, scenario_id: g.scenario_id, scenario_title: g.scenario_title,\n    drive_file_id: f.id,\n    drive_url: f.webViewLink || ('https://drive.google.com/file/d/' + f.id + '/view'),\n    qc_status: g.qc_status, qc_reason: g.qc_reason, attempts: g.attempts\n  };\n  \n  const res = await this.helpers.httpRequest({\n    method: 'POST', url: cfg.SUPABASE_URL + '/rest/v1/outputs?on_conflict=persona_id,scenario_id',\n    headers: H, body: row, json: true });\n  out.push({ json: { recorded: Array.isArray(res) ? res[0] : res } });\n}\nreturn out;\n"
+      },
+      "id": "d2a29382-2c33-412f-91bb-29f283545922",
+      "name": "B: Record Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1104,
+        496
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "ac70082a-ca76-4d0c-bea5-ea0fff03b0be",
+      "name": "B: Merge to C",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        1120,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// WORKER-MODE C planner. Builds exactly ONE video job for the persona+scenario\n// this Worker received from the Orchestrator. No global DB scan, no flags\n// reading. Phase B (in this same Worker run) just wrote the output row, so we\n// fetch THAT row and use its drive_file_id for the video.\nconst cfg = $('Config').first().json;\nconst H = { apikey: cfg.SUPABASE_SECRET };\n\n// The job this Worker is processing — set by Worker Trigger.\nconst wt = $('Worker Trigger').all();\nconst job = (wt && wt[0] && wt[0].json) || {};\nif (!job.persona_id || !job.scenario) {\n  throw new Error('C planner: missing job context. Got: ' + JSON.stringify(job));\n}\n\n// ---- Look up the output Phase B just wrote (persona_id + scenario_id) ----\nconst outputs = await this.helpers.httpRequest({ method: 'GET',\n  url: cfg.SUPABASE_URL + '/rest/v1/outputs?select=*'\n       + '&persona_id=eq.' + job.persona_id\n       + '&scenario_id=eq.' + encodeURIComponent(job.scenario.id)\n       + '&qc_status=eq.pass',\n  headers: H, json: true });\nif (!outputs || outputs.length === 0) {\n  // Phase B didn't produce a passed image for this job → nothing to video.\n  // Exit cleanly; the run continues, the next persona+scenario will be a\n  // fresh Worker execution.\n  return [];\n}\nconst o = outputs[0];\n\n// ---- Skip if this output already has a video (resumability) ----\nlet existing = [];\ntry {\n  existing = await this.helpers.httpRequest({ method: 'GET',\n    url: cfg.SUPABASE_URL + '/rest/v1/videos?select=output_id&output_id=eq.' + o.id,\n    headers: H, json: true });\n} catch (e) { existing = []; }\nif (existing && existing.length > 0) return [];\n\n// ---- Look up the persona's account for the presenter profile ----\nlet personas = [], accounts = [];\ntry {\n  personas = await this.helpers.httpRequest({ method: 'GET',\n    url: cfg.SUPABASE_URL + '/rest/v1/personas?select=id,tiktok_account_id&id=eq.' + job.persona_id,\n    headers: H, json: true });\n} catch (e) { personas = []; }\nconst persona = (personas && personas[0]) || {};\nif (persona.tiktok_account_id) {\n  try {\n    accounts = await this.helpers.httpRequest({ method: 'GET',\n      url: cfg.SUPABASE_URL + '/rest/v1/tiktok_accounts?select=id,name,gender,age,country,language'\n           + '&id=eq.' + persona.tiktok_account_id,\n      headers: H, json: true });\n  } catch (e) { accounts = []; }\n}\nconst account = (accounts && accounts[0]) || {};\n\n// ---- Resolve language (same map / fallback as before) ----\nconst SUPPORTED = {english:'English',mandarin:'Mandarin Chinese',japanese:'Japanese',\n  korean:'Korean',spanish:'Spanish',french:'French',german:'German',portuguese:'Portuguese'};\nconst COUNTRY_LANG = {\n  'united states':'english','usa':'english','us':'english','united kingdom':'english',\n  'uk':'english','england':'english','canada':'english','australia':'english',\n  'new zealand':'english','ireland':'english','singapore':'english',\n  'china':'mandarin','taiwan':'mandarin','hong kong':'mandarin',\n  'japan':'japanese','south korea':'korean','korea':'korean',\n  'spain':'spanish','mexico':'spanish','argentina':'spanish','colombia':'spanish',\n  'chile':'spanish','peru':'spanish','venezuela':'spanish','ecuador':'spanish',\n  'france':'french','belgium':'french','germany':'german','austria':'german','switzerland':'german',\n  'portugal':'portuguese','brazil':'portuguese',\n  'india':'hindi','saudi arabia':'arabic','united arab emirates':'arabic','uae':'arabic',\n  'italy':'italian','russia':'russian','netherlands':'dutch','thailand':'thai',\n  'indonesia':'indonesian','turkey':'turkish','poland':'polish'\n};\nfunction resolveLanguage(countryRaw) {\n  const c = String(countryRaw || '').trim().toLowerCase();\n  const official = COUNTRY_LANG[c] || 'english';\n  if (SUPPORTED[official]) {\n    return { spoken_language: SUPPORTED[official], language_is_native: true,\n             accent_country: countryRaw || 'United States', fallback_used: false };\n  }\n  return { spoken_language: 'English', language_is_native: false,\n           accent_country: countryRaw || 'United States', fallback_used: true,\n           unsupported_official_language: official };\n}\nconst lang = resolveLanguage(account.country);\n\n// ---- Emit exactly the one video job ----\nreturn [{ json: {\n  output_id: o.id,\n  scenario_id: o.scenario_id,\n  scene_drive_file_id: o.drive_file_id,\n  scenario: job.scenario,\n  info_file_id: cfg.INFO_FILE_ID,\n  persona_id: job.persona_id,\n  presenter: {\n    name:    account.name   || null,\n    gender:  account.gender || 'female',\n    age:     (account.age != null ? account.age : null),\n    country: account.country || 'United States',\n    account_language: account.language || null,\n    spoken_language: lang.spoken_language,\n    language_is_native: lang.language_is_native,\n    accent_country: lang.accent_country,\n    fallback_used: lang.fallback_used,\n    unsupported_official_language: lang.unsupported_official_language || null\n  }\n} }];"
+      },
+      "id": "229b359d-1f39-42fa-af22-d8ef68c17cc6",
+      "name": "C: Build Video Job List",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1536,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// One Drive file per item to download: each scene image + the information config file.\nconst items = $input.all();\nconst files = []; const seen = new Set();\nfor (const it of items) {\n  const fid = it.json.scene_drive_file_id;\n  if (fid && !seen.has(fid)) { seen.add(fid); files.push({ json: { fileId: fid, kind: 'scene' } }); }\n}\nconst infoId = items.length ? items[0].json.info_file_id : null;\nif (infoId && !seen.has(infoId)) { seen.add(infoId); files.push({ json: { fileId: infoId, kind: 'info' } }); }\nreturn files;\n"
+      },
+      "id": "08526e73-d350-4587-bb7b-b6acadd0947b",
+      "name": "C: List Video Ref Files",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1296,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $json.fileId }}"
+        },
+        "options": {}
+      },
+      "id": "c0b6c3e3-b5e6-4123-bd26-8e4a37008f7a",
+      "name": "C: Download Video Ref Files",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1040,
+        976
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "35ZnLJ9SfEawS46I",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the video asset library: scene images -> base64 data URIs; info file -> parsed JSON.\nconst cfg = $('Config').first().json;\nconst items = $input.all();\nconst library = {}; let info = null;\nfor (let i = 0; i < items.length; i++) {\n  const j = items[i].json || {};\n  const id = j.id || j.fileId;\n  if (!items[i].binary || !items[i].binary.data) continue;\n  const buf = await this.helpers.getBinaryDataBuffer(i, 'data');\n  if (id === cfg.INFO_FILE_ID) {\n    try { info = JSON.parse(buf.toString('utf8')); }\n    catch (e) { throw new Error('Could not parse the information file as JSON: ' + e.message); }\n  } else {\n    const mime = (items[i].binary.data.mimeType) || 'image/png';\n    library[id] = 'data:' + mime + ';base64,' + buf.toString('base64');\n  }\n}\nif (!info) throw new Error('Information config file not found - check INFO_FILE_ID in Config.');\nreturn [{ json: { library, info } }];\n"
+      },
+      "id": "293d468c-eeea-4099-ad49-a5a1609d7726",
+      "name": "C: Build Video Library",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -816,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Per video job: builds the Anthropic request that writes the Seedance prompt + dialogue.\nconst cfg = $('Config').first().json;\nconst VIDEO_SCRIPT_SYSTEM = `You are a senior brand-film director and prompt engineer. You write the generation prompt for ByteDance's Seedance 2.0 image-to-video model, which turns a still image (the first frame) into a short cinematic clip with NATIVE synchronized audio and lip-synced dialogue.\n\n\n# SEEDANCE 2.0 — CREATOR VIDEO PROMPT RULEBOOK (v4)\n\nModel: bytedance/seedance-2.0/reference-to-video\nPrompt author: an LLM (Claude Sonnet). This document is the LLM's instruction set.\n\n---\n\n## 0. THE ONE THING TO UNDERSTAND\n\nSeedance 2.0 does NOT get more realistic when you add more rules. It gets\n*less* realistic. Long prompts dilute the image anchor and pile up conflicting\ninstructions; long motion checklists make the body perform like a robot.\n\nNaturalness comes from: a STRONG, undiluted @Image1 anchor + a SHORT prompt +\nLETTING the model's physics run instead of choreographing it.\n\n**The final emitted prompt must be ~150–230 words. Never longer.**\nThe sections below are how the LLM *thinks*. They are NOT copied into the prompt.\n\n---\n\n## 1. INPUTS THE LLM RECEIVES\n\n- @Image1 — the master frame (a person holding the product). This image is the\n  single source of truth for face, hair, wardrobe, product, framing, environment,\n  composition, and lighting.\n- INFORMATION JSON — brand/product facts. Source for dialogue content only.\n- SCENARIO — the description used to create the photo. Use ONLY for continuity\n  context (so motion stays plausible). Do NOT re-describe the scene from it; the\n  image already contains the scene.\n- PRESENTER PROFILE — gender, age, country, spoken_language, language_is_native,\n  accent_country. Drives the voice line.\n\n---\n\n## 2. CORE PRINCIPLES (the mindset)\n\n1. **Anchor, don't describe.** Point at @Image1 once, clearly, then trust it.\n   Do not re-describe what is already visible in the photo.\n2. **Preserve the subject; move the camera.** Identity, wardrobe, product, and\n   environment are LOCKED. The camera is explicitly FREE to move. State both.\n   Never say \"preserve framing\" — that freezes the camera.\n3. **The camera is the audience.** The presenter is talking directly to a real\n   person on the other side of the lens. Eyes go to the lens, face stays toward\n   the lens, the whole performance is addressed to camera. This rule OVERRIDES\n   the photo: if @Image1 shows the presenter looking at a mirror, at the\n   product, at the ground, or off to the side, the video corrects the gaze to\n   the camera from the very first frame.\n4. **The product obeys physics.** The product is a real physical object. It is\n   held in the hand — fingers wrapped, palm in contact — for the entire clip.\n   It never floats, never hovers, never separates from the hand. If the hand\n   moves, the product moves with it. If the hand opens, the product falls — so\n   the hand does not open. There is no exception.\n5. **One camera move.** Exactly one primary camera motion, on its own line.\n6. **Don't choreograph the body.** Give 2–3 light performance cues, then tell\n   the model to let natural physics run. Never list specific body movements.\n7. **Speech is arithmetic.** Time is fixed at 15s. Pace is controlled by the\n   dialogue WORD COUNT, not by adjectives. Pauses exist only if punctuation is\n   written into the dialogue string.\n\n---\n\n## 3. DIALOGUE RULES (this is where most failures come from)\n\n**Word budget — HARD LIMIT.** Relaxed, paused delivery runs ~2 words/second.\nDialogue must END by ~12–13s, leaving a silent tail.\n\n- Total dialogue: **30–40 words. Absolute maximum 45.**\n- 2–3 short sentences. Never one long sentence.\n\n**Write the pauses into the text.** The model speaks the string literally.\n- Use periods between short sentences.\n- Use an em-dash ( — ) or ellipsis ( … ) for a beat / hesitation.\n- Use commas for micro-pauses.\n- Example of a pause that WORKS: \"I've been using it for weeks now… and honestly?\"\n- An instruction like \"speak with natural pauses\" inserts NOTHING. Only\n  punctuation does.\n\n**Content** comes from the INFORMATION JSON. Mention ALLUVI and Tirzepatide\nnaturally — once or twice total, never stacked. Never invent product claims.\nNever alter brand names.\n\n**Tone:** one identity only — a calm, warm, confident person casually recording.\nDo NOT mix \"high-energy TikTok creator\" with \"slow and calm.\" Pick calm.\n\n**Language:** if language_is_native is true, write the dialogue in\nspoken_language. If false, write it in English carried by the\naccent_country accent.\n\n---\n\n## 4. THE OUTPUT TEMPLATE (the LLM fills this and emits ONLY this)\n\n===== PROMPT TEMPLATE — START =====\n\n@Image1 is the exact opening frame and the master reference for identity,\nhair, wardrobe, product, framing, environment, and lighting. The video is a\nliving continuation of this exact photograph — the same person, in the same\nplace, holding the same product, from the very first frame.\n\n[ONE sentence: who the presenter is and the product already in their hand,\nread from @Image1. No invented detail.]\n\nGaze and address: the presenter speaks directly to the camera as if it were\na real person. Eyes locked on the lens, face turned toward the lens, the\nentire performance addressed to camera from frame one to the last frame.\nIf @Image1 shows the eyes looking elsewhere (mirror, ground, product, off to\nthe side), correct the gaze to the lens immediately as the first frame begins.\n\nProduct grip and physics: the product is a real, solid object held in the\nhand for the entire clip. The fingers stay wrapped around it and the palm\nstays in contact with it at all times. The product moves only when the hand\nmoves, follows the hand's motion exactly, and obeys gravity. The hand never\nopens, the fingers never release, and the product never floats in mid-air,\nhovers, separates from the hand, or stays in place while the hand moves\naway. The hand and the product behave as a single rigid unit.\n\nSpoken dialogue — {spoken_language}, {accent_country} accent, {gender}, ~{age}\nyears old — delivered slowly and calmly with natural pauses:\n\"{30–40 words, 2–3 short sentences, pauses written in with . — …}\"\n\nTimeline (one continuous take, no cuts):\n0–4s: the photograph comes alive; eyes on the lens; natural breathing; dialogue\nbegins immediately; the product stays gripped in the hand exactly as in @Image1.\n4–9s: the presenter keeps talking to camera; the fingers stay firmly closed\naround the product as the hand re-settles in a small, natural way; gaze briefly\ndrops to the product for under a second, then returns to the lens.\n9–13s: eyes back on the lens; the dialogue reaches its point and ends on a\nsoft, genuine smile to camera; the product remains gripped in the hand.\n13–15s: no speech; eyes still on the lens; relaxed breathing and a small\nnatural settle; the product remains gripped in the hand and clearly visible.\n\nCamera: handheld, vertical framing, medium-tight on the presenter; ONE slow,\ncontinuous push-in across the whole clip; subtle natural micro-movement; a\nsingle uninterrupted take.\n\nPerformance: let the body move with natural, unforced physics — easy weight\nshifts, breathing, small conversational hand gestures. Natural blinking and\naccurate lip-sync. Do not choreograph rigid or repetitive movements.\n\nAudio: clear {spoken_language} speech in a warm, natural {accent_country}\nvoice; relaxed conversational pace with real sentence pauses; very low ambient\nbackground; the voice stays dominant.\n\nLook: match the exact lighting, color grade, skin texture, and shallow depth\nof field of @Image1.\n\nAvoid: jitter, warped or extra fingers, identity drift, temporal flicker,\nrushed or robotic speech, eyes looking at a mirror, eyes looking at the\nground, eyes looking off-screen for more than a moment, head turned away\nfrom camera, the product floating in mid-air, the product hovering without\ncontact with the hand, the product separating from the fingers, the hand\nopening or releasing, any change of wardrobe, product, or environment.\n\n===== PROMPT TEMPLATE — END =====\n\nThat template is ~250 words filled. If a filled prompt runs longer, CUT — do\nnot add.\n\n---\n\n## 5. FIELD GUIDANCE (short)\n\n- **Anchor line:** keep it exactly as written. It is the most important line in\n  the prompt; do not weaken it.\n- **Presenter sentence:** one sentence only. If @Image1 shows a woman holding\n  a box, write \"A young woman holds the ALLUVI Tirzepatide box.\" Nothing more.\n- **Gaze line:** keep it exactly as written. This is what stops the mirror /\n  ground / product-gaze problem. Do not soften it, do not shorten it, do not\n  merge it into another section.\n- **Product grip and physics line:** keep it exactly as written. This is what\n  stops the floating-product problem. Do not soften it, do not shorten it, do\n  not merge it into another section. NEVER use the word \"loose\" anywhere in\n  the prompt. NEVER use the phrase \"loosen the grip\", \"open the hand\", \"let\n  go\", \"release\", or \"grip adjustment\" — those phrases trigger the failure.\n- **Timeline:** exactly four beats. Never more. Each beat is one short line.\n  Beats describe *performance, gaze, and product*, never camera, never new\n  scenery. Every beat must reaffirm where the eyes are AND that the fingers\n  remain closed around the product.\n- **Camera line:** one move. A slow push-in is the safe default. Alternatives:\n  a slow, gentle pull-back, or a static handheld hold. Never combine moves.\n- **Avoid line:** keep the listed items above. Do NOT name internal artifacts\n  (\"scan lines\", \"mesh\", \"striped face\") — naming them can summon them. The\n  gaze-failure and physics-failure items ARE allowed, because those are\n  behaviors, not internal rendering artifacts.\n\n---\n\n## 6. HARD LIMITS — DO NOT\n\n- Do not exceed ~250 words in the final prompt.\n- Do not write more than 45 words of dialogue.\n- Do not use more than four timeline beats.\n- Do not give more than one camera move.\n- Do not omit the Gaze line. It is mandatory in every prompt.\n- Do not omit the Product grip and physics line. It is mandatory in every\n  prompt.\n- Do not let a timeline beat go without confirming both: gaze position\n  (on the lens, or briefly on the product then back to the lens) AND product\n  contact (fingers closed around the product).\n- Do not use the words \"loose\", \"loosen\", \"release\", \"let go\", \"open the\n  hand\", or \"grip adjustment\" anywhere in the prompt.\n- Do not list specific body movements (\"shift hip\", \"sway torso\", etc.).\n- Do not say \"preserve framing / preserve composition\" — say \"preserve identity,\n  wardrobe, product, environment\" and let the camera move.\n- Do not re-describe the scene, the face, or the wardrobe — @Image1 owns those.\n- Do not repeat the same adjective (\"realistic\", \"natural\", \"cinematic\")\n  more than once or twice total.\n- Do not mix \"energetic creator\" and \"calm\" tone.\n\n---\n\n## 7. WORKED EXAMPLE (filled — this is the target quality bar)\n\nPresenter profile: female, 29, USA, English, native. @Image1 shows her looking\nslightly down at the product.\n\n===== WORKED EXAMPLE — START =====\n\n@Image1 is the exact opening frame and the master reference for identity,\nhair, wardrobe, product, framing, environment, and lighting. The video is a\nliving continuation of this exact photograph — the same person, in the same\nplace, holding the same product, from the very first frame.\n\nA young woman holds an ALLUVI Tirzepatide box, facing the camera in her kitchen.\n\nGaze and address: she speaks directly to the camera as if it were a real\nperson. Eyes locked on the lens, face turned toward the lens, the entire\nperformance addressed to camera from frame one to the last frame. Although\n@Image1 shows her glancing down at the box, she lifts her eyes to the lens\nimmediately as the first frame begins and holds that eye contact.\n\nProduct grip and physics: the box is a real, solid object held in her hand\nfor the entire clip. Her fingers stay wrapped around it and her palm stays\nin contact with it at all times. The box moves only when her hand moves,\nfollows her hand's motion exactly, and obeys gravity. Her hand never opens,\nher fingers never release, and the box never floats in mid-air, hovers,\nseparates from her hand, or stays in place while her hand moves away. Her\nhand and the box behave as a single rigid unit.\n\nSpoken dialogue — English, American accent, female, ~29 years old — delivered\nslowly and calmly with natural pauses:\n\"Okay, I have to be honest with you. I've been using ALLUVI Tirzepatide for a\nfew weeks now… and I really did not expect to feel this good. It just — it\nactually fits into my life.\"\n\nTimeline (one continuous take, no cuts):\n0–4s: the photograph comes alive; eyes on the lens; natural breathing; she\nbegins speaking immediately; the box stays gripped in her hand exactly as in\n@Image1.\n4–9s: she keeps talking to camera; her fingers stay firmly closed around the\nbox as her hand re-settles in a small, natural way; her gaze briefly drops to\nthe box for under a second, then returns to the lens.\n9–13s: eyes back on the lens; her last line lands and she finishes on a soft,\ngenuine smile to camera; the box remains gripped in her hand.\n13–15s: no speech; eyes still on the lens; relaxed breathing and a small\nnatural settle; the box remains gripped in her hand and clearly visible.\n\nCamera: handheld, vertical framing, medium-tight on the presenter; one slow,\ncontinuous push-in across the whole clip; subtle natural micro-movement; a\nsingle uninterrupted take.\n\nPerformance: let the body move with natural, unforced physics — easy weight\nshifts, breathing, small conversational hand gestures. Natural blinking and\naccurate lip-sync. Do not choreograph rigid or repetitive movements.\n\nAudio: clear English speech in a warm, natural American voice; relaxed\nconversational pace with real sentence pauses; very low ambient background;\nthe voice stays dominant.\n\nLook: match the exact lighting, color grade, skin texture, and shallow depth\nof field of @Image1.\n\nAvoid: jitter, warped or extra fingers, identity drift, temporal flicker,\nrushed or robotic speech, eyes looking at a mirror, eyes looking at the\nground, eyes looking off-screen for more than a moment, head turned away\nfrom camera, the product floating in mid-air, the product hovering without\ncontact with the hand, the product separating from the fingers, the hand\nopening or releasing, any change of wardrobe, product, or environment.\n\n===== WORKED EXAMPLE — END =====\n\nDialogue word count above: ~38. Within budget. Pauses present (. , … —).\nGaze locked to lens in every timeline beat. Grip confirmed in every timeline\nbeat.\n\n---\n\n## 8. OPTIONAL — THE BIGGEST UPGRADE BEYOND THE RULEBOOK\n\nThe reference-to-video endpoint accepts up to 12 reference files. If the\npipeline can ever supply them:\n\n- @Audio1 — a short clip of a real voice in the target accent. Accent and\n  pacing transfer far more reliably from audio than from a text description.\n  This is the real fix for unnatural delivery.\n- @Video1 — a short handheld creator clip with the talent looking straight to\n  camera while holding a similar product. Camera path, pacing, gaze direction\n  AND hand-on-product physics transfer far better from a reference clip than\n  from any text. This is the strongest fix for camera motion, gaze drift, and\n  product-floating problems combined.\n\nEven one reusable audio clip per accent and one reusable to-camera handheld\nclip would outperform any wording change in this document.\n\nOUTPUT FORMAT\nReturn ONLY a single minified JSON object - no markdown, no commentary - in exactly this shape:\n{\"prompt\": \"<the full Seedance prompt as one string>\", \"dialogue\": \"<the exact spoken line, plain text>\"}\nThe dialogue value must be identical to the quoted line inside the prompt.`;\nconst lib = $('C: Build Video Library').first().json;\nconst info = lib.info || {};\nconst jobs = $('C: Build Video Job List').all().map(i => i.json);\nreturn jobs.map((job, i) => {\n  const sc = job.scenario || {};\n  const brief = JSON.stringify({\n    scene: sc.scene, mood: sc.mood, palette: sc.palette,\n    framing: sc.framing, camera_height: sc.camera_height, lighting: sc.lighting\n  }, null, 2);\n  const brand = JSON.stringify(info, null, 2);\n  const presenter = JSON.stringify(job.presenter || {}, null, 2);\n  const userMsg =\n    'BRAND / PRODUCT INFORMATION FILE (the ONLY approved source of brand and product wording):\\n'\n    + brand\n    + '\\n\\nPRESENTER PROFILE (the person speaking in the video - honour gender, age, country, spoken_language and accent):\\n'\n    + presenter\n    + '\\n\\nSCENE CONTEXT for this shot (the still image is the first frame of the video):\\n'\n    + brief\n    + '\\n\\nWrite the Seedance 2.0 video prompt and the spoken dialogue now. '\n    + 'Write the dialogue in the presenter spoken_language and describe the matching voice and accent inside the prompt. '\n    + 'Return ONLY the JSON object.';\n  return { json: {\n    job: job,\n    _url: 'https://api.anthropic.com/v1/messages',\n    _headers: { 'x-api-key': cfg.ANTHROPIC_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },\n    _body: { model: cfg.ANTHROPIC_MODEL, max_tokens: 4000, system: VIDEO_SCRIPT_SYSTEM, messages: [{ role: 'user', content: userMsg }] }\n  }, pairedItem: { item: i } };\n});\n"
+      },
+      "id": "8b5e8c81-fd12-4eea-a524-d46cecb43236",
+      "name": "C: Build Video Script Req",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -576,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json._url }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify($json._headers) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json._body) }}",
+        "options": {
+          "timeout": 230000
+        }
+      },
+      "id": "2b9b18b1-d374-4584-8cb4-a1c228f5128e",
+      "name": "C: Write Video Script",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1280,
+        1248
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parses the script JSON and builds the fal QUEUE submit request for Seedance 2.0.\n// A for-loop (not .map) so a bad/truncated script can be skipped without\n// killing the run - the rest of the videos still go through.\nconst cfg = $('Config').first().json;\nconst lib = $('C: Build Video Library').first().json;\nconst prev = $('C: Build Video Script Req').all();\nconst items = $input.all();\nconst out = [];\nfor (let i = 0; i < items.length; i++) {\n  const cur = items[i].json || {};\n  // retry path: item already carries a built job + prompt from a prior attempt\n  if (cur && cur._retry === true && cur.job) {\n    const sceneUriR = lib.library ? lib.library[cur.job.scene_drive_file_id] : null;\n    if (sceneUriR) {\n      out.push({ json: {\n        job: cur.job, video_prompt: cur.video_prompt || '', dialogue: cur.dialogue || '',\n        video_attempt: cur.video_attempt || 2,\n        _url: 'https://queue.fal.run/' + cfg.FAL_VIDEO_MODEL,\n        _headers: { 'Authorization': 'Key ' + cfg.FAL_KEY, 'content-type': 'application/json' },\n        _body: {\n          prompt: cur.video_prompt || '', image_urls: [sceneUriR],\n          duration: String(cfg.VIDEO_DURATION), resolution: cfg.VIDEO_RESOLUTION,\n          aspect_ratio: cfg.VIDEO_ASPECT, generate_audio: cfg.VIDEO_GENERATE_AUDIO !== false\n        }\n      } });\n    }\n    continue;\n  }\n  const anth = items[i].json;\n  const pj = prev[i] && prev[i].json;\n  if (!pj || !pj.job) continue;   // not a script item / index drift - skip safely\n  const job = pj.job;\n  // Anthropic ran out of tokens -> JSON is cut off mid-string. Skip this job\n  // (raise max_tokens in C: Build Video Script Req if this happens a lot).\n  if (anth && anth.stop_reason === 'max_tokens') continue;\n  let txt = (anth.content || []).filter(b => b.type === 'text').map(b => b.text).join('').trim();\n  let script;\n  try { script = JSON.parse(txt.replace(/```json/gi, '').replace(/```/g, '').trim()); }\n  catch (e) { continue; }   // malformed/truncated script - skip this one job\n  if (!script || !script.prompt) continue;\n  const sceneUri = lib.library ? lib.library[job.scene_drive_file_id] : null;\n  if (!sceneUri) continue;  // scene image missing - skip, retried on a later run\n  out.push({ json: {\n    job: job, video_prompt: script.prompt || '', dialogue: script.dialogue || '', video_attempt: 1,\n    _url: 'https://queue.fal.run/' + cfg.FAL_VIDEO_MODEL,\n    _headers: { 'Authorization': 'Key ' + cfg.FAL_KEY, 'content-type': 'application/json' },\n    _body: {\n      prompt: script.prompt || '',\n      image_urls: [sceneUri],\n      duration: String(cfg.VIDEO_DURATION),\n      resolution: cfg.VIDEO_RESOLUTION,\n      aspect_ratio: cfg.VIDEO_ASPECT,\n      generate_audio: cfg.VIDEO_GENERATE_AUDIO !== false\n    }\n  } });\n}\nreturn out;\n"
+      },
+      "id": "82ca99b1-c42a-431c-b230-26b07e71e445",
+      "name": "C: Build Video Submit Req",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1056,
+        1248
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json._url }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify($json._headers) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json._body) }}",
+        "options": {
+          "timeout": 230000
+        }
+      },
+      "id": "6307824b-1293-4839-a7ab-7675709ab22c",
+      "name": "C: Submit Video Job",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -768,
+        1248
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Reads the fal queue submit responses and prepares the polling loop.\n// A single failed submit is skipped (that video is retried next run); the\n// run only stops if EVERY submit failed - which points at a fal billing issue.\nconst prev = $('C: Build Video Submit Req').all();\nconst falKey = $('Config').first().json.FAL_KEY;\nconst items = $input.all();\nconst out = [];\nfor (let i = 0; i < items.length; i++) {\n  const r = items[i].json || {};\n  const carried = prev[i].json;\n  const statusUrl = r.status_url || (r.response_url ? r.response_url + '/status' : null);\n  const responseUrl = r.response_url;\n  if (!statusUrl || !responseUrl) continue;   // this video failed to submit - skip it\n  out.push({ json: {\n    job: carried.job, video_prompt: carried.video_prompt, dialogue: carried.dialogue,\n    video_attempt: carried.video_attempt || 1,\n    _pollUrl: statusUrl, _resultUrl: responseUrl,\n    _headers: { 'Authorization': 'Key ' + falKey }\n  }, pairedItem: { item: i } });\n}\nif (out.length === 0 && items.length > 0) {\n  throw new Error('No video jobs were accepted by fal - every submit failed. Check your fal.ai balance at fal.ai/dashboard/billing.');\n}\nreturn out;\n"
+      },
+      "id": "b7f7e4b4-d958-4e58-9b66-d662a6130a88",
+      "name": "C: Start Poll",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -512,
+        1248
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 75
+      },
+      "id": "04446eac-3d98-4a9b-8338-dbaa0dbaac13",
+      "name": "C: Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -352,
+        976
+      ],
+      "webhookId": "8177ec72-1cda-4ab3-a03b-12264d160f6b"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json._pollUrl }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify($json._headers) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "77d8f6e0-4f8e-48e9-b4e8-6cd25c8e4e39",
+      "name": "C: Poll Video Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -192,
+        976
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Inspects the fal queue status and decides: done, keep waiting, or retry.\n// A fal-side failure (ERROR/FAILED status, or a 5xx error item from the poll\n// HTTP node) no longer throws - it is flagged for an automatic resubmit,\n// up to MAX_VIDEO_ATTEMPTS total tries.\nconst cfg = $('Config').first().json;\nconst MAX_VIDEO_ATTEMPTS = 2;   // total fal submit attempts per video\nconst ctx = $('C: Start Poll').all();\nconst items = $input.all();\nlet priorChecks = 0;\ntry { priorChecks = $('C: Check Video Status').all().length; } catch (e) { priorChecks = 0; }\nif (priorChecks > 40) throw new Error('Video generation timed out after too many status polls.');\nreturn items.map((it, i) => {\n  const st = it.json || {};\n  const carried = (ctx[i] ? ctx[i].json : ctx[0].json);\n  const attempt = carried.video_attempt || 1;\n  // fal poll itself errored (5xx / downstream_service_error) OR fal reports failure\n  const httpErr = st && st.error;\n  const status = String(st.status || '').toUpperCase();\n  const falFailed = httpErr || status === 'ERROR' || status === 'FAILED';\n  if (falFailed) {\n    if (attempt < MAX_VIDEO_ATTEMPTS) {\n      // flag for resubmit; carry the incremented attempt counter\n      return { json: Object.assign({}, carried, { done: false, _retry: true,\n        video_attempt: attempt + 1 }), pairedItem: { item: i } };\n    }\n    // attempts exhausted - give up on this video, no row written, retried next run\n    return { json: Object.assign({}, carried, { done: false, _retry: false,\n      _give_up: true }), pairedItem: { item: i } };\n  }\n  const done = (status === 'COMPLETED' || status === 'OK');\n  return { json: Object.assign({}, carried, { done: done, _retry: false }),\n           pairedItem: { item: i } };\n});\n"
+      },
+      "id": "ac45e501-90af-42ca-867f-cc4ba69db22b",
+      "name": "C: Check Video Status",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        32,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "89ea89c6-4ad6-4e43-8637-f1c399681188",
+              "leftValue": "={{ $json.done === true || $json._give_up === true }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "c47278af-1214-42d8-aa54-1d035fbb6f6f",
+      "name": "C: Video Done?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        272,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json._resultUrl }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify($json._headers) }}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "9747e2c7-5836-40d5-b114-8a6d250da076",
+      "name": "C: Get Video Result",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        512,
+        976
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json._url }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          },
+          "timeout": 240000
+        }
+      },
+      "id": "bbd1694f-d388-43a9-80da-8d1f121b0582",
+      "name": "C: Finalize Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        768,
+        976
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "name": "={{ $('C: Prep Video Download').item.json.video_filename }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive",
+          "cachedResultName": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1TczHhP5xrnmqbuoCblwnaeyXdI_-vQoi",
+          "mode": "list",
+          "cachedResultName": "videos",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1TczHhP5xrnmqbuoCblwnaeyXdI_-vQoi"
+        },
+        "options": {}
+      },
+      "id": "5078d3f4-55a5-4a21-8052-151dbd5c9ea5",
+      "name": "C: Upload Video",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        960,
+        976
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "35ZnLJ9SfEawS46I",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Inserts each generated video into Supabase `videos` (upsert on output_id).\nconst cfg = $('Config').first().json;\nconst H = { apikey: cfg.SUPABASE_SECRET, 'content-type': 'application/json',\n            Prefer: 'return=representation,resolution=merge-duplicates' };\nconst gens = $('C: Prep Video Download').all().map(i => i.json);\nconst byName = {};\nfor (const g of gens) byName[g.video_filename] = g;\nconst out = [];\nfor (const item of $input.all()) {\n  const f = item.json;\n  const g = byName[f.name] || {};\n  const row = {\n    output_id: g.output_id, scenario_id: g.scenario_id,\n    drive_file_id: f.id,\n    drive_url: f.webViewLink || ('https://drive.google.com/file/d/' + f.id + '/view'),\n    prompt_used: (g.prompt_used || '').slice(0, 4000),\n    dialogue: g.dialogue || '', status: 'done'\n  };\n  const res = await this.helpers.httpRequest({\n    method: 'POST', url: cfg.SUPABASE_URL + '/rest/v1/videos?on_conflict=output_id',\n    headers: H, body: row, json: true });\n  out.push({ json: { recorded_video: Array.isArray(res) ? res[0] : res } });\n}\nreturn out;\n"
+      },
+      "id": "c710d3f5-24c4-4e90-9097-c26d157bb21b",
+      "name": "C: Record Video",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        1328
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extracts the finished video URL and carries the metadata forward.\n// No download happens here - the next node streams the file straight into\n// n8n binary storage, so the MP4 never sits in this node's memory.\nconst ctx = $('C: Start Poll').all();\nconst items = $input.all();\nconst out = [];\nfor (let i = 0; i < items.length; i++) {\n  const r = items[i].json || {};\n  const carried = (ctx[i] ? ctx[i].json : ctx[0].json);\n  const job = carried.job;\n  if (carried._give_up === true) continue;   // video failed all attempts - skip, retried next run\n  const v = r.video || r.output || {};\n  const url = v.url || r.video_url || r.url || (r.videos && r.videos[0] && r.videos[0].url);\n  if (!url) continue;   // no video url - skip, retried next run\n  out.push({ json: {\n    output_id: job.output_id, scenario_id: job.scenario_id,\n    video_filename: 'video_o' + job.output_id + '__' + job.scenario_id + '.mp4',\n    prompt_used: carried.video_prompt, dialogue: carried.dialogue,\n    _url: url\n  }, pairedItem: { item: i } });\n}\nreturn out;\n"
+      },
+      "id": "ad20ce56-033f-4407-86f3-1d5d0a94ad2e",
+      "name": "C: Prep Video Download",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        976
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "25ee6f40-af54-4c0c-8b99-ab4a2b6d4fcc",
+              "leftValue": "={{ $json._retry }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ecc5f03f-1384-4184-a362-4b597cf60135",
+      "name": "C: Retry Video?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        96,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// WORKER-MODE D planner. Builds the single TikTok post job for the video this\n// Worker just made (Phase C wrote one row in `videos`). Honours TIKTOK_AUTO_POST.\nconst cfg = $('Config').first().json;\nif (cfg.TIKTOK_AUTO_POST !== true) return [];   // feature off → no posts\nconst H = { apikey: cfg.SUPABASE_SECRET };\n\nconst wt = $('Worker Trigger').all();\nconst job = (wt && wt[0] && wt[0].json) || {};\nif (!job.persona_id || !job.scenario) return [];\n\n// ---- Look up the output Phase B wrote for this persona+scenario ----\nconst outputs = await this.helpers.httpRequest({ method: 'GET',\n  url: cfg.SUPABASE_URL + '/rest/v1/outputs?select=id'\n       + '&persona_id=eq.' + job.persona_id\n       + '&scenario_id=eq.' + encodeURIComponent(job.scenario.id),\n  headers: H, json: true });\nif (!outputs || outputs.length === 0) return [];\nconst outputId = outputs[0].id;\n\n// ---- Look up the video Phase C wrote for that output ----\nconst videos = await this.helpers.httpRequest({ method: 'GET',\n  url: cfg.SUPABASE_URL + '/rest/v1/videos?select=id,drive_url,dialogue,output_id&output_id=eq.' + outputId,\n  headers: H, json: true });\nif (!videos || videos.length === 0) return [];\nconst v = videos[0];\n\n// ---- Skip if this video already has a TikTok post (resumability) ----\nlet existing = [];\ntry {\n  existing = await this.helpers.httpRequest({ method: 'GET',\n    url: cfg.SUPABASE_URL + '/rest/v1/tiktok_posts?select=video_id&video_id=eq.' + v.id,\n    headers: H, json: true });\n} catch (e) { existing = []; }\nif (existing && existing.length > 0) return [];\n\n// ---- Look up persona → account → auth ----\nconst personas = await this.helpers.httpRequest({ method: 'GET',\n  url: cfg.SUPABASE_URL + '/rest/v1/personas?select=id,tiktok_account_id&id=eq.' + job.persona_id,\n  headers: H, json: true });\nconst persona = (personas && personas[0]) || {};\nif (!persona.tiktok_account_id) return [];\n\nconst accounts = await this.helpers.httpRequest({ method: 'GET',\n  url: cfg.SUPABASE_URL + '/rest/v1/tiktok_accounts?select=id,tiktok_id,name,country,language&id=eq.' + persona.tiktok_account_id,\n  headers: H, json: true });\nconst account = (accounts && accounts[0]) || {};\nif (!account.id) return [];\n\nlet auths = [];\ntry {\n  auths = await this.helpers.httpRequest({ method: 'GET',\n    url: cfg.SUPABASE_URL + '/rest/v1/tiktok_auth?select=*&tiktok_account_id=eq.' + account.id,\n    headers: H, json: true });\n} catch (e) { auths = []; }\nconst auth = (auths && auths[0]) || null;\nif (!auth || !auth.access_token) return [];   // account not connected yet\n\nreturn [{ json: {\n  video_id: v.id, video_drive_url: v.drive_url, dialogue: v.dialogue || '',\n  tiktok_account_id: account.id, tiktok_handle: account.tiktok_id,\n  auth: { access_token: auth.access_token, refresh_token: auth.refresh_token,\n          expires_at: auth.expires_at, open_id: auth.open_id }\n} }];"
+      },
+      "id": "8f1cdf42-a273-426f-98f7-1c5d4b917e19",
+      "name": "D: Build Post Job List",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1664,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// If the access_token is expired (or expires in < 60s), refresh it via\n// TikTok OAuth and persist the new token. Otherwise passthrough.\nconst cfg = $('Config').first().json;\nconst H = { apikey: cfg.SUPABASE_SECRET, 'Content-Type': 'application/json', Prefer: 'return=representation' };\nconst now = Date.now();\nconst out = [];\nfor (const it of $input.all()) {\n  const d = it.json;\n  const exp = new Date(d.auth.expires_at).getTime();\n  let auth = d.auth;\n  if (exp - now < 60000) {\n    // refresh\n    const form = new URLSearchParams();\n    form.append('client_key', cfg.TIKTOK_CLIENT_KEY);\n    form.append('client_secret', cfg.TIKTOK_CLIENT_SECRET);\n    form.append('grant_type', 'refresh_token');\n    form.append('refresh_token', auth.refresh_token);\n    const r = await this.helpers.httpRequest({\n      method: 'POST', url: 'https://open.tiktokapis.com/v2/oauth/token/',\n      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },\n      body: form.toString(), json: true });\n    if (r && r.access_token) {\n      auth = { access_token: r.access_token,\n               refresh_token: r.refresh_token || auth.refresh_token,\n               expires_at: new Date(Date.now() + (r.expires_in || 86400) * 1000).toISOString(),\n               open_id: auth.open_id };\n      // persist new token\n      await this.helpers.httpRequest({ method: 'PATCH',\n        url: cfg.SUPABASE_URL + '/rest/v1/tiktok_auth?tiktok_account_id=eq.' + d.tiktok_account_id,\n        headers: H, body: { access_token: auth.access_token, refresh_token: auth.refresh_token,\n                            expires_at: auth.expires_at, updated_at: new Date().toISOString() },\n        json: true });\n    } else {\n      // refresh failed - skip this job (will record failure later)\n      out.push({ json: Object.assign({}, d, { _refresh_failed: true }) });\n      continue;\n    }\n  }\n  out.push({ json: Object.assign({}, d, { auth }) });\n}\nreturn out;\n"
+      },
+      "id": "5e068dec-9bf4-4e7a-aa12-31279dae429e",
+      "name": "D: Refresh Token",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1472,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Builds the TikTok /v2/post/publish/video/init/ request using PULL_FROM_URL.\n// TikTok will fetch the video itself from the Drive URL - we send only metadata.\nconst cfg = $('Config').first().json;\nreturn $input.all().map(it => {\n  const d = it.json;\n  if (d._refresh_failed) return { json: d };  // pass through so we can record the failure\n  // caption: use dialogue as a starting caption, trimmed to TikTok's 2200-char limit\n  const caption = String(d.dialogue || '').slice(0, 2000);\n  return { json: Object.assign({}, d, {\n    _url: 'https://open.tiktokapis.com/v2/post/publish/video/init/',\n    _headers: {\n      'Authorization': 'Bearer ' + d.auth.access_token,\n      'Content-Type': 'application/json; charset=UTF-8'\n    },\n    _body: {\n      post_info: {\n        title: caption,\n        privacy_level: cfg.TIKTOK_POST_PRIVACY || 'SELF_ONLY',\n        disable_duet: false, disable_comment: false, disable_stitch: false,\n        video_cover_timestamp_ms: 1000\n      },\n      source_info: {\n        source: 'PULL_FROM_URL',\n        video_url: d.video_drive_url\n      }\n    }\n  }) };\n});\n"
+      },
+      "id": "a9f3e1d4-b9bf-47d8-b466-951f742c002e",
+      "name": "D: Build Init Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1296,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json._url }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify($json._headers) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json._body) }}",
+        "options": {
+          "timeout": 230000
+        }
+      },
+      "id": "6ed320ea-f4cb-413e-bcbb-7c93f81de45f",
+      "name": "D: Submit Post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1120,
+        1456
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Reads the publish init response, prepares the status-poll context.\nconst prev = $('D: Build Init Request').all();\nconst items = $input.all();\nconst out = [];\nfor (let i = 0; i < items.length; i++) {\n  const r = items[i].json || {};\n  const carried = prev[i].json;\n  if (carried._refresh_failed) {\n    out.push({ json: Object.assign({}, carried, { _post_failed: true,\n      _fail_reason: 'token refresh failed' }) });\n    continue;\n  }\n  const publishId = (r && r.data && r.data.publish_id) || null;\n  if (!publishId) {\n    out.push({ json: Object.assign({}, carried, { _post_failed: true,\n      _fail_reason: 'no publish_id (init error): ' + JSON.stringify(r).slice(0, 200) }) });\n    continue;\n  }\n  out.push({ json: Object.assign({}, carried, {\n    publish_id: publishId,\n    _url: 'https://open.tiktokapis.com/v2/post/publish/status/fetch/',\n    _headers: { 'Authorization': 'Bearer ' + carried.auth.access_token,\n                'Content-Type': 'application/json; charset=UTF-8' },\n    _body: { publish_id: publishId }\n  }) });\n}\nreturn out;\n"
+      },
+      "id": "b797d6a4-1e52-465c-8e80-5be6607a229e",
+      "name": "D: Start Post Poll",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -944,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "id": "49976491-dcbc-46e4-a2e9-6d5633fd7dc5",
+      "name": "D: Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -752,
+        1456
+      ],
+      "webhookId": "5c628cea-c2cf-47ba-ae0c-52c916149ce9"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json._url }}",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify($json._headers) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json._body) }}",
+        "options": {
+          "timeout": 230000
+        }
+      },
+      "id": "3adb7236-3f0f-4d6b-af28-190889da4f02",
+      "name": "D: Poll Post Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -576,
+        1456
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Inspect TikTok status response. Decide: done / keep polling / failed.\nconst ctx = $('D: Start Post Poll').all();\nconst items = $input.all();\nlet priorChecks = 0;\ntry { priorChecks = $('D: Check Post Status').all().length; } catch(e) { priorChecks = 0; }\nif (priorChecks > 40) throw new Error('TikTok post status polling timed out.');\nreturn items.map((it, i) => {\n  const r = it.json || {};\n  const carried = (ctx[i] ? ctx[i].json : ctx[0].json);\n  if (carried._post_failed) return { json: Object.assign({}, carried, { _done: true }) };\n  const status = (r && r.data && r.data.status) || '';\n  if (status === 'PUBLISH_COMPLETE') {\n    const url = (r.data.publicaly_available_post_id && Array.isArray(r.data.publicaly_available_post_id) && r.data.publicaly_available_post_id[0])\n              || (r.data.public_post_id && Array.isArray(r.data.public_post_id) && r.data.public_post_id[0])\n              || '';\n    const postUrl = url ? ('https://www.tiktok.com/@' + (carried.tiktok_handle || '').replace(/^@/, '') + '/video/' + url) : '';\n    return { json: Object.assign({}, carried, { _done: true, _post_failed: false, tiktok_post_url: postUrl }) };\n  }\n  if (status === 'FAILED') {\n    const reason = (r.data && (r.data.fail_reason || r.data.error)) || 'TikTok reported FAILED';\n    return { json: Object.assign({}, carried, { _done: true, _post_failed: true, _fail_reason: reason }) };\n  }\n  return { json: Object.assign({}, carried, { _done: false }) };\n});\n"
+      },
+      "id": "e91922a6-aa6a-43a6-8150-1698d06e66b1",
+      "name": "D: Check Post Status",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -400,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cf6c9061-a903-4ddf-8180-5b47e6be3526",
+              "leftValue": "={{ $json._done }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "1f8aff3b-4350-4f4a-a7cf-06b60fd298c4",
+      "name": "D: Post Done?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -224,
+        1456
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Records the post outcome in tiktok_posts. UNIQUE(video_id) prevents dupes.\nconst cfg = $('Config').first().json;\nconst H = { apikey: cfg.SUPABASE_SECRET, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=representation' };\nfor (const it of $input.all()) {\n  const d = it.json;\n  const body = {\n    video_id: d.video_id,\n    tiktok_account_id: d.tiktok_account_id,\n    publish_id: d.publish_id || null,\n    status: d._post_failed ? 'failed' : 'posted',\n    tiktok_post_url: d.tiktok_post_url || null,\n    error_reason: d._post_failed ? String(d._fail_reason || '').slice(0, 400) : null,\n    posted_at: d._post_failed ? null : new Date().toISOString()\n  };\n  await this.helpers.httpRequest({ method: 'POST',\n    url: cfg.SUPABASE_URL + '/rest/v1/tiktok_posts?on_conflict=video_id',\n    headers: H, body, json: true });\n}\nreturn $input.all();\n"
+      },
+      "id": "d34e9f7b-087d-432e-be14-df9593bd9820",
+      "name": "D: Record Post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -32,
+        1456
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "B: Get Personas": {
+      "main": [
+        [
+          {
+            "node": "B: List Reference Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: List Reference Files": {
+      "main": [
+        [
+          {
+            "node": "B: Download Reference Images",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Download Reference Images": {
+      "main": [
+        [
+          {
+            "node": "B: Build Image Library",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Build Image Library": {
+      "main": [
+        [
+          {
+            "node": "B: Build Job List",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "B: Merge to C",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "B: Build Job List": {
+      "main": [
+        [
+          {
+            "node": "B: Build Scene Prompt Req",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Build Scene Prompt Req": {
+      "main": [
+        [
+          {
+            "node": "B: Write Scene Prompt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Write Scene Prompt": {
+      "main": [
+        [
+          {
+            "node": "B: Prep Generation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Prep Generation": {
+      "main": [
+        [
+          {
+            "node": "B: Build FAL Edit Req",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Build FAL Edit Req": {
+      "main": [
+        [
+          {
+            "node": "B: Generate Scene Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Generate Scene Image": {
+      "main": [
+        [
+          {
+            "node": "B: Build QC Req",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Build QC Req": {
+      "main": [
+        [
+          {
+            "node": "B: QC Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: QC Check": {
+      "main": [
+        [
+          {
+            "node": "B: Evaluate QC",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Evaluate QC": {
+      "main": [
+        [
+          {
+            "node": "B: QC Passed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: QC Passed?": {
+      "main": [
+        [
+          {
+            "node": "B: Finalize Scene",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "B: Build FAL Edit Req",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Finalize Scene": {
+      "main": [
+        [
+          {
+            "node": "B: Upload Scene",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Upload Scene": {
+      "main": [
+        [
+          {
+            "node": "B: Record Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Record Output": {
+      "main": [
+        [
+          {
+            "node": "B: Merge to C",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "B: Merge to C": {
+      "main": [
+        [
+          {
+            "node": "C: Build Video Job List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Build Video Job List": {
+      "main": [
+        [
+          {
+            "node": "C: List Video Ref Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: List Video Ref Files": {
+      "main": [
+        [
+          {
+            "node": "C: Download Video Ref Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Download Video Ref Files": {
+      "main": [
+        [
+          {
+            "node": "C: Build Video Library",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Build Video Library": {
+      "main": [
+        [
+          {
+            "node": "C: Build Video Script Req",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Build Video Script Req": {
+      "main": [
+        [
+          {
+            "node": "C: Write Video Script",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Write Video Script": {
+      "main": [
+        [
+          {
+            "node": "C: Build Video Submit Req",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Build Video Submit Req": {
+      "main": [
+        [
+          {
+            "node": "C: Submit Video Job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Submit Video Job": {
+      "main": [
+        [
+          {
+            "node": "C: Start Poll",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Start Poll": {
+      "main": [
+        [
+          {
+            "node": "C: Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Wait": {
+      "main": [
+        [
+          {
+            "node": "C: Poll Video Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Poll Video Status": {
+      "main": [
+        [
+          {
+            "node": "C: Check Video Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Check Video Status": {
+      "main": [
+        [
+          {
+            "node": "C: Retry Video?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Video Done?": {
+      "main": [
+        [
+          {
+            "node": "C: Get Video Result",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "C: Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Get Video Result": {
+      "main": [
+        [
+          {
+            "node": "C: Prep Video Download",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Finalize Video": {
+      "main": [
+        [
+          {
+            "node": "C: Upload Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Upload Video": {
+      "main": [
+        [
+          {
+            "node": "C: Record Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Prep Video Download": {
+      "main": [
+        [
+          {
+            "node": "C: Finalize Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Retry Video?": {
+      "main": [
+        [
+          {
+            "node": "C: Build Video Submit Req",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "C: Video Done?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "C: Record Video": {
+      "main": [
+        [
+          {
+            "node": "D: Build Post Job List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "D: Build Post Job List": {
+      "main": [
+        [
+          {
+            "node": "D: Refresh Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "D: Refresh Token": {
+      "main": [
+        [
+          {
+            "node": "D: Build Init Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "D: Build Init Request": {
+      "main": [
+        [
+          {
+            "node": "D: Submit Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "D: Submit Post": {
+      "main": [
+        [
+          {
+            "node": "D: Start Post Poll",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "D: Start Post Poll": {
+      "main": [
+        [
+          {
+            "node": "D: Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "D: Wait": {
+      "main": [
+        [
+          {
+            "node": "D: Poll Post Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "D: Poll Post Status": {
+      "main": [
+        [
+          {
+            "node": "D: Check Post Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "D: Check Post Status": {
+      "main": [
+        [
+          {
+            "node": "D: Post Done?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "D: Post Done?": {
+      "main": [
+        [
+          {
+            "node": "D: Record Post",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "D: Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Worker Trigger": {
+      "main": [
+        [
+          {
+            "node": "Config",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalise Job": {
+      "main": [
+        [
+          {
+            "node": "B: Get Personas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config": {
+      "main": [
+        [
+          {
+            "node": "Normalise Job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d25e8389-5820-4fd9-92ee-4d112220cc78",
+  "meta": {
+    "instanceId": "697d6abab60044c9e38a226cf712e693a901c5bdff25fcfa2e3876ed50e9063a"
+  },
+  "id": "mNunpf2krfpVRpsX",
+  "tags": []
+}
